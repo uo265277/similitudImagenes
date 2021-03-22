@@ -2,6 +2,13 @@
 # clipLimit – This parameter sets the threshold for contrast limiting. The default value is 40.
 # tileGridSize – This sets the number of tiles in the row and column. By default this is 8×8. It is used while the image is divided into tiles for applying CLAHE.
 import cv2
+from skimage.io import imread
+from skimage.transform import resize
+from skimage.feature import hog
+from skimage import exposure
+import matplotlib.pyplot as plt
+import numpy as np
+
 def aplicaCLAHE(img_path: str):
     # Reading the image from the present directory
     image = cv2.imread(img_path)
@@ -104,12 +111,14 @@ def gabor(img_path):
 # *******************************************************************************
 
 def aplicar_hog(img_path):
-    img = imread(img_path)
+    img = cv2.imread(img_path)
     plt.axis("off")
     plt.imshow(img)
+
     print(img.shape)
+
     # resizing image
-    resized_img = resize(img, (128 * 4, 64 * 4))
+    resized_img = cv2.resize(img, (128 * 4, 64 * 4))
     plt.axis("off")
     # plt.imshow(resized_img)
     # print(resized_img.shape)
@@ -122,3 +131,12 @@ def aplicar_hog(img_path):
     # save the images
     # plt.imsave("resized_img.jpg", resized_img)
     plt.imsave(img_path, hog_image, cmap="gray")
+
+
+#escalaGrises(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
+#aplicaCLAHE(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
+#normalizaImagen(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
+#bordeImagen(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
+#contornoImagen(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
+#gabor(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
+aplicar_hog(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
