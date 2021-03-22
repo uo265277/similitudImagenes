@@ -1,4 +1,5 @@
-
+import numpy as np
+import ayudaDirectorios
 #*******************************************************************************
 
 #devuelve 1 de las 8 diferentes normas de matriz o vector
@@ -82,7 +83,7 @@ def calculaDiccionarioDistancia2(feature_vectors):
     # diccionario que contiene diccionarios de la imagen con las demas imagenes y su similitud
     distancias: dict = {}
     for k in feature_vectors:
-        dirK =directorioImagen(k)
+        dirK = ayudaDirectorios.directorioImagen(k)
         print("Se procede a calcular las distancias de las demás imagenes con la imagen: " ,k)
         nombreDiccionario ="distacias " +k
         print(nombreDiccionario)
@@ -90,7 +91,7 @@ def calculaDiccionarioDistancia2(feature_vectors):
         distancias[k ]= nombreDiccionario
         for k2 in feature_vectors:
 
-            dirK2 =directorioImagen(k2)
+            dirK2 = ayudaDirectorios.directorioImagen(k2)
             if(dirK !=dirK2):
                 diff =findDifference(feature_vectors[k] ,feature_vectors[k2])
                 print("La distancia de ", k, " con " ,k2, "es", diff)
@@ -121,7 +122,7 @@ def calculaDiccionarioDistancia3(feature_vectors):
 
 
         # CREO EL DICCIONARIO DE DIRECTORIO
-        dirK =directorioImagen(k)
+        dirK = ayudaDirectorios.directorioImagen(k)
 
         # si estoy en el mismo directorio
         if cont==0:
@@ -155,7 +156,7 @@ def calculaDiccionarioDistancia3(feature_vectors):
             diccionarioGlobal[dirK ]= diccionarioDirectorios
 
         # CREO EL SUBDICCIONARIO DE LA IMAGEN
-        nomK =nombreImagen(k)
+        nomK = ayudaDirectorios.nombreImagen(k)
         diccionarioImagen ="SubDiccionarioImagen " +dirK +nomK
         print()
         print("--------------  " +diccionarioImagen +" -----------------------------")
@@ -168,8 +169,8 @@ def calculaDiccionarioDistancia3(feature_vectors):
         # print("fin")
         for k2 in feature_vectors:
 
-            dirK2 =directorioImagen(k2)
-            nomK2 =nombreImagen(k2)
+            dirK2 = ayudaDirectorios.directorioImagen(k2)
+            nomK2 = ayudaDirectorios.nombreImagen(k2)
             if(dirK !=dirK2):
                 diff =findDifference(feature_vectors[k] ,feature_vectors[k2])
                 # diff=distanciaCoseno(feature_vectors[k],feature_vectors[k2])
@@ -207,12 +208,12 @@ def calculaDiccionarioDistancia4(feature_vectors, ratio):
 
 
         # CREO EL DICCIONARIO DE DIRECTORIO
-        dirK =directorioImagen(k)
+        dirK = ayudaDirectorios.directorioImagen(k)
 
         # si estoy en el mismo directorio
         if cont==0:
             print("traza  if cont==0: ")
-            cont =con t +1
+            cont =cont +1
             dirAux =dirK
             diccionarioDirectorios ="DiccionarioDelDirectorio " +dirK
             print(diccionarioDirectorios)
@@ -226,7 +227,7 @@ def calculaDiccionarioDistancia4(feature_vectors, ratio):
         print()
         print()
         print()
-        print("*************DICCIONARIO DE DIRECTORIO  " +dir K +" ******************")
+        print("*************DICCIONARIO DE DIRECTORIO  " +dirK +" ******************")
         # print("Se procede a calcular las distancias de las demás imagenes con la imagen: ",k)
 
         # si el contador es 0 quiere decir que he cambiado de directorio
@@ -241,7 +242,7 @@ def calculaDiccionarioDistancia4(feature_vectors, ratio):
             diccionarioGlobal[dirK ]= diccionarioDirectorios
 
         # CREO EL SUBDICCIONARIO DE LA IMAGEN
-        nomK =nombreImagen(k)
+        nomK = ayudaDirectorios.nombreImagen(k)
         diccionarioImagen ="SubDiccionarioImagen " +dirK +nomK
         print()
         print("--------------  " +diccionarioImagen +" -----------------------------")
@@ -254,8 +255,8 @@ def calculaDiccionarioDistancia4(feature_vectors, ratio):
         # print("fin")
         for k2 in feature_vectors:
 
-            dirK2 =directorioImagen(k2)
-            nomK2 =nombreImagen(k2)
+            dirK2 = ayudaDirectorios.directorioImagen(k2)
+            nomK2 = ayudaDirectorios.nombreImagen(k2)
             if(dirK !=dirK2):
                 diff =findDifference(feature_vectors[k] ,feature_vectors[k2])
                 print("La distancia de ", k, " con " ,k2, "es", diff)

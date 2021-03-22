@@ -1,6 +1,8 @@
-# When applying CLAHE, there are two parameters to be remembered:
-# clipLimit – This parameter sets the threshold for contrast limiting. The default value is 40.
-# tileGridSize – This sets the number of tiles in the row and column. By default this is 8×8. It is used while the image is divided into tiles for applying CLAHE.
+#*******************************************************************************
+
+from keras.applications.resnet50 import ResNet50
+from keras.preprocessing import image
+from keras.applications.resnet50 import preprocess_input, decode_predictions
 import cv2
 from skimage.io import imread
 from skimage.transform import resize
@@ -8,6 +10,59 @@ from skimage.feature import hog
 from skimage import exposure
 import matplotlib.pyplot as plt
 import numpy as np
+from keras.preprocessing import image
+from keras.models import Model
+
+
+
+
+# When applying CLAHE, there are two parameters to be remembered:
+# clipLimit – This parameter sets the threshold for contrast limiting. The default value is 40.
+# tileGridSize – This sets the number of tiles in the row and column. By default this is 8×8. It is used while the image is divided into tiles for applying CLAHE.
+
+# *******************************************************************************
+
+# carga una imagen en formato pil
+# coge la imagen pil y la convierte en un array de numpy
+# expande el tamaño del array
+# adapta la imagen al formato requerido
+def predict(img_path: str, model: Model):
+    # APLICAMOS CLAHE A LA IMAGEN
+    # aplicaCLAHE(img_path)
+    # escalaGrises(img_path)
+    # aplicar_hog(img_path)
+    gabor(img_path)
+    # normalizaImagen(img_path)
+    # bordeImagen(img_path)
+
+    img = image.load_img(img_path, target_size=(224, 224))
+
+    # img = cv2.cvtColor(np.float32(img),cv2.COLOR_BGR2GRAY)
+
+    x = image.img_to_array(img)
+    # print("prueba",x.shape)
+    # preprocesado de imagen
+    # pasandola a escala de gris
+    # y= (x[:,:,0]*0.2989
+    # +x[:,:,1]*0.5870
+    # +x[:,:,2]*0.1140)/3
+    # x[:,:,0]=np.copy(y)
+    # x[:,:,1]=np.copy(y)
+    # x[:,:,2]=np.copy(y)
+
+    # gris = cv2.cvtColor(x, cv2.COLOR_BGR2GRAY)
+
+    # print("prueba2",gris.shape)
+    x = image.img_to_array(x)
+
+    # print("prueba3",x.shape)
+
+    # x[:,:,2] = cv2.equalizeHist(x[:,:,2])
+
+    x = np.expand_dims(x, axis=0)
+    x = preprocess_input(x)
+    return model.predict(x)
+
 
 def aplicaCLAHE(img_path: str):
     # Reading the image from the present directory
@@ -100,7 +155,6 @@ def contornoImagen(img_path):
 
 def gabor(img_path):
     g_kernel = cv2.getGaborKernel((21, 21), 8.0, 4 * np.pi / 4, 10.0, 0.5, 0, ktype=cv2.CV_32F)
-
     img = cv2.imread(img_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     filtered_img = cv2.filter2D(img, cv2.CV_8UC3, g_kernel)
@@ -139,4 +193,4 @@ def aplicar_hog(img_path):
 #bordeImagen(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
 #contornoImagen(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
 #gabor(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
-aplicar_hog(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
+#aplicar_hog(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\coati.jpg")
