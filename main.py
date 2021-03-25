@@ -2,9 +2,14 @@ from keras.applications.resnet50 import ResNet50
 import ayudaDirectorios
 import diccionarioDistancias
 import preprocesado
+from subprocess import call
 
 feature_vectors: dict = {}
 model = ResNet50(weights='imagenet')
+
+call(["pdfimages.exe", "-j", "pdf","directorios\\mapaches"])
+
+
 # model = MobileNet(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 # ¿como saco las imagenes de cada pdf y las añado a cada directorio? -> pdfimages para texto pdftxt
 # adaptar para que se compare cada imagen de dir x con cada imagen de los diferentes directorios
