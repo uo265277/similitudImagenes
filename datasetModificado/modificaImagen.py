@@ -1,4 +1,5 @@
 import cv2, numpy as np
+import os
 
 
 def recortar (path):
@@ -12,6 +13,7 @@ def recortar (path):
     nuevopath=nombre[0]+recortado+".jpg"
     print(nuevopath)
     cv2.imwrite(nuevopath, crop_img)
+    os.remove(path)
 
 
 
@@ -29,6 +31,8 @@ def rotar(path):
     nuevopath = nombre[0] + rotado + ".jpg"
     print(nuevopath)
     cv2.imwrite(nuevopath, new90center)
+    os.remove(path)
+
 
 #rotar(path)
 
@@ -80,6 +84,8 @@ def modificaColor(path, nivelRealce, color):
         nuevopath = nombre[0] + azulModificado + ".jpg"
         print(nuevopath)
         cv2.imwrite(nuevopath, blueEnhancedImage)
+    os.remove(path)
+
 
 #modificaColor(path, 40, "azul")
 #modificaColor(path, 40, "verde")
@@ -105,8 +111,9 @@ def traslacion(path, ejex, ejey):
     nuevopath = nombre[0] + trasladado + ".jpg"
     print(nuevopath)
     cv2.imwrite(nuevopath, translated)
+    os.remove(path)
 
-#traslacion(path, 30, 50)
+
 
 
 
@@ -123,6 +130,7 @@ def zoomDiferencia(path):
     nuevopath = nombre[0] + zoomDiferencia + ".jpg"
     print(nuevopath)
     cv2.imwrite(nuevopath, diff)
+    os.remove(path)
 
 #zoomDiferencia(path, 2)
 
@@ -142,13 +150,15 @@ def reduccionRuido(path, fuerza,):
     nuevopath = nombre[0] + reduccionRuido + ".jpg"
     print(nuevopath)
     cv2.imwrite(nuevopath, result)
+    os.remove(path)
+
 
 #reduccionRuido(path, 30)
 
 def escalaGrises(path):
     image = cv2.imread(path)
     # Resizing the image for compatibility
-    image = cv2.resize(image, (224, 224))
+    # = cv2.resize(image, (224, 224))
 
     # The initial processing of the image
     # image = cv2.medianBlur(image, 3)
@@ -159,6 +169,8 @@ def escalaGrises(path):
     nuevopath = nombre[0] + escalaGrises + ".jpg"
     print(nuevopath)
     cv2.imwrite(nuevopath, image_bw)
+    os.remove(path)
+
 
 #escalaGrises(path)
 
@@ -176,6 +188,8 @@ def desenfoqueMediano(path,blur):
     nuevopath = nombre[0] + desenfoqueMediano + ".jpg"
     print(nuevopath)
     cv2.imwrite(nuevopath, blur_image)
+    os.remove(path)
+
 
 #desenfoqueMediano(path, 7)
 
@@ -192,6 +206,8 @@ def ajusteContraste(path, contraste):
     nuevopath = nombre[0] + ajusteContraste + ".jpg"
     print(nuevopath)
     cv2.imwrite(nuevopath, contrast_img)
+    os.remove(path)
+
 
 #ajusteContraste(path, 3)
 
@@ -203,6 +219,8 @@ def sinModificar(path):
     nuevopath = nombre[0] + sinModificar + ".jpg"
     print(nuevopath)
     cv2.imwrite(nuevopath, img)
+    os.remove(path)
+
 
 
 

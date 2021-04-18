@@ -77,7 +77,15 @@ def contImagenes(dir):
     number_files = len(list)
     return number_files
 
+#************************************************************************************
+from PIL import Image
+def pasarAJPG(path):
+    im = Image.open(path)
+    nombreFinal=path.split(".")[0]+".jpg"
+    im.save(nombreFinal)
+    os.remove(path)
 
+#***********************************************************
 
 
 def getAllFilesInDirectory(directoryPath: str):

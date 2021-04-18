@@ -66,8 +66,8 @@ def modificacionesAleatorias(directorio):
       sinModificar(img_path)
 
 
-modificacionesAleatorias("directorioAModificar")
-
+#modificacionesAleatorias("directorioAModificarPrueba")
+traslacion(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\datasetModificado\directorioAModificarPrueba\orquidea.jpg", 30, 50)
 
 
 

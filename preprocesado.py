@@ -28,17 +28,16 @@ from keras.models import Model
 # adapta la imagen al formato requerido
 def predict(img_path: str, model: Model):
     # APLICAMOS CLAHE A LA IMAGEN
-    # aplicaCLAHE(img_path)
-    # escalaGrises(img_path)
+    aplicaCLAHE(img_path)
+    #escalaGrises(img_path)
     # aplicar_hog(img_path)
-    gabor(img_path)
-    # normalizaImagen(img_path)
+    #gabor(img_path)
+    #normalizaImagen(img_path)
     # bordeImagen(img_path)
 
     img = image.load_img(img_path, target_size=(224, 224))
 
     # img = cv2.cvtColor(np.float32(img),cv2.COLOR_BGR2GRAY)
-
     x = image.img_to_array(img)
     # print("prueba",x.shape)
     # preprocesado de imagen
@@ -54,13 +53,15 @@ def predict(img_path: str, model: Model):
 
     # print("prueba2",gris.shape)
     x = image.img_to_array(x)
-
+    print("traza2 " + str(x.shape))
     # print("prueba3",x.shape)
 
     # x[:,:,2] = cv2.equalizeHist(x[:,:,2])
 
     x = np.expand_dims(x, axis=0)
+    print("traza3 " + str(x.shape))
     x = preprocess_input(x)
+    print("traza4 " + str(x.shape))
     return model.predict(x)
 
 
