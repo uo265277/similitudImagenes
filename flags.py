@@ -1,21 +1,23 @@
 import cv2
 import numpy as np
+import skimage
 from keras.models import Model
 from keras.preprocessing import image
 from keras.applications.resnet50 import preprocess_input, decode_predictions
 from keras.applications.resnet50 import ResNet50
 from skimage import measure
+from skimage import feature
 
 
 def predice(img, model: Model):
-    print("llego a predice")
+    #print("llego a predice")
     x=cv2.merge([img,img,img])
     #x = image.img_to_array(img)
-    print("traza1 "+ str(x.shape))
+    #print("traza1 "+ str(x.shape))
     x = np.expand_dims(x, axis=0)
-    print("traza2 "+ str(x.shape))
+    #print("traza2 "+ str(x.shape))
     x = preprocess_input(x)
-    print("traza3 "+ str(x.shape))
+    #print("traza3 "+ str(x.shape))
     return model.predict(x)
 
 def findDifference(f1, f2):
@@ -39,9 +41,9 @@ def escalaGrises(img_path, img_path2):
     # image = cv2.medianBlur(image, 3)
     image_bw = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     image2_bw = cv2.cvtColor(image2, cv2.COLOR_BGR2GRAY)
-    print("ya pase a gris " )
+    #print("ya pase a gris " )
     diff =findDifference(predice(image_bw,model) ,predice(image2_bw,model))
-    print( diff)
+    #print( diff)
     return diff
 
 def normalizado(img_path, img_path2):
@@ -97,9 +99,9 @@ def hog(img_path, img_path2):
     resized_img = cv2.resize(img, (128 * 4, 64 * 4))
     resized_img2 = cv2.resize(img2, (128 * 4, 64 * 4))
     # creating hog features
-    fd, hog_image = hog(resized_img, orientations=9, pixels_per_cell=(8, 8),
+    fd, hog_image = skimage.feature.hog(resized_img, orientations=9, pixels_per_cell=(8, 8),
                         cells_per_block=(2, 2), visualize=True, multichannel=True)
-    fd, hog_image2 = hog(resized_img2, orientations=9, pixels_per_cell=(8, 8),
+    fd, hog_image2 = skimage.feature.hog(resized_img2,  orientations=9,pixels_per_cell=(8, 8),
                         cells_per_block=(2, 2), visualize=True, multichannel=True)
     diff = findDifference(predice(hog_image, model), predice(hog_image2, model))
     return diff
@@ -137,8 +139,8 @@ def sift_sim(path_a, path_b):
   print(str(type(desc_a)) + str(type(desc_b)))
   if(str(type(desc_b))=="<class 'NoneType'>" or str(type(desc_a))=="<class 'NoneType'>"):
     return 0
-  print(desc_b)
-  print(desc_a)
+  #print(desc_b)
+  #print(desc_a)
   matches = bf.match(desc_a, desc_b)
   similar_regions = [i for i in matches if i.distance < 60]
   resultado = len(similar_regions) / len(matches)
@@ -168,3 +170,39 @@ def mse(img_path, img_path2):
     # return the MSE, the lower the error, the more "similar"
     # the two images are
     return err
+
+
+
+
+def gabor_sift_sim(img_path, img_path2):
+    print("estoy en gabor + sift sim")
+    orb = cv2.ORB_create()
+    model = ResNet50(weights='imagenet')
+
+    g_kernel = cv2.getGaborKernel((21, 21), 8.0, 4 * np.pi / 4, 10.0, 0.5, 0, ktype=cv2.CV_32F)
+    img = cv2.imread(img_path)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img2 = cv2.imread(img_path2)
+    img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2GRAY)
+    filtered_img = cv2.filter2D(img, cv2.CV_8UC3, g_kernel)
+    filtered_img2 = cv2.filter2D(img2, cv2.CV_8UC3, g_kernel)
+    filtered_img = cv2.resize(filtered_img, (224, 224))
+    filtered_img2 = cv2.resize(filtered_img2, (224, 224))
+    # find the keypoints and descriptors with SIFT
+    kp_a, desc_a = orb.detectAndCompute(filtered_img, None)
+    kp_b, desc_b = orb.detectAndCompute(filtered_img2, None)
+    # print(desc_b  )
+    # initialize the bruteforce matcher
+    bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
+    # match.distance is a float between {0:100} - lower means more similar
+    #print(str(type(desc_a)) + str(type(desc_b)))
+    if (str(type(desc_b)) == "<class 'NoneType'>" or str(type(desc_a)) == "<class 'NoneType'>"):
+        return 0
+    #print(desc_b)
+    #print(desc_a)
+    matches = bf.match(desc_a, desc_b)
+    similar_regions = [i for i in matches if i.distance < 60]
+    resultado = len(similar_regions) / len(matches)
+    if len(matches) < 16:
+        return 0
+    return resultado

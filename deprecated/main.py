@@ -1,12 +1,10 @@
-from keras.applications.resnet50 import ResNet50
 import ayudaDirectorios
-import diccionarioDistancias
-import preprocesado
-from subprocess import call
 
-feature_vectors: dict = {}
-model = ResNet50(weights='imagenet')
-imagenes: dict = {}
+from diccionarioGlobal import calculaDiccionario
+
+#feature_vectors: dict = {}
+#model = ResNet50(weights='imagenet')
+#imagenes: dict = {}
 
 #call(["pdfimages.exe", "-j", "pdf","directorios\\mapaches"])
 
@@ -14,25 +12,32 @@ imagenes: dict = {}
 # model = MobileNet(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 # ¿como saco las imagenes de cada pdf y las añado a cada directorio? -> pdfimages para texto pdftxt
 # adaptar para que se compare cada imagen de dir x con cada imagen de los diferentes directorios
+
+#Se obtienen los subdirectorios de el Directorio general "directorios"
 directorios = ayudaDirectorios.obtenerDirectorios()
-cont  =0
+#cont  =0
+#se recorre cada directorio y se añade a una lista la sublista -> [PATH_IMAGEN, DIRECTORIO_PADRE]
+imagenes=[]
 for directorio in directorios:
     print("recorro el directorio "+directorio)
     for img_path in ayudaDirectorios.getAllFilesInDirectory("directorios/"+directorio):
         #nombreFinal=ayudaDirectorios.pasarAJPG(img_path)
-        cont=cont+1
-        imagenes[img_path] = cont
+        #cont=cont+1
+        sublista=[img_path,directorio]
+        imagenes.append(sublista)
         #print(img_path)
-        feature_vectors[img_path] = preprocesado.predict(img_path, model)[0]
+        #feature_vectors[img_path] = preprocesado.predict(img_path, model)[0]
 # results=findDifferences(feature_vectors)
-ayudaDirectorios.pretty(imagenes)
+#ayudaDirectorios.pretty(imagenes)
 
 print("****************************************************************************************")
 
+diccionarioGlobal=calculaDiccionario(imagenes)
+
 # diccionarioGlobal=calculaDiccionarioDistancia3(feature_vectors)
 #diccionarioGlobal = diccionarioDistancias.calculaDiccionarioDistancia4(feature_vectors,0.02)
-diccionarioGlobal = diccionarioDistancias.calculaDiccionarioDistancia4(feature_vectors, 0.1
-                                                                       )
+#diccionarioGlobal = diccionarioDistancias.calculaDiccionarioDistancia4(feature_vectors, 0.1)
+
 print()
 print()
 print()

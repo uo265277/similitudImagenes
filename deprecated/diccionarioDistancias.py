@@ -2,11 +2,8 @@ import numpy as np
 import ayudaDirectorios
 from skimage import measure
 import cv2
-import os
-from skimage.measure import compare_ssim
-from skimage.transform import resize
-from scipy.stats import wasserstein_distance
-from imageio import imread
+
+
 #*******************************************************************************
 def sift_sim(path_a, path_b):
   '''
@@ -46,7 +43,7 @@ def sift_sim(path_a, path_b):
 #¿aqui podria usar la biblioteca annoy para calcular el vecino mas cercano? o mas bien en otra funcion buscando entre todos los v. carac ya que aqui solo
 #se comparan el v.caract de img a y de img b
 #¿que norma es manhattan o la distancia euclidea? ¿cual es mejor?
-from comparativas_sme_ssim import mse
+from deprecated.comparativas_sme_ssim import mse
 
 
 def findDifference(f1, f2):

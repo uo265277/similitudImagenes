@@ -1,40 +1,16 @@
 import ayudaDirectorios
+from pruebaComparativas import comparaImagenes
 
 
-#diccionario que devuelve asociado a el path de la imagen una lista de pares comparador-resultado
-#siend los pares : comparativa normal escala grises -> doistancia euclídea
+def calculaDiccionario(imagenes, flags):
+    # entrada -> lista de sublistas -> [PATH_IMAGEN, DIRECTORIO_PADRE]
 
-
-
-#metodo normalizar luista que recibe un diccionario con pares string valor y normaliza el valor entre 0 y 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def calculaDiccionarioDistancia4(feature_vectors, ratio):
-    # entrada -> clave valor imagen y su vector
-    # salida -> k, v siendo k imagen comparada con la imagen a;  y v la distancia euclidea
-
-    # diccionario que contiene diccionarios de la imagen con las demas imagenes y su similitud
     # CREO EL DICCIONARIO GLOBAL
     diccionarioGlobal: dict = {}
     cont =0
     dirAux =""
 
-    for k in feature_vectors:
+    for k in imagenes:
 
 
         # CREO EL DICCIONARIO DE DIRECTORIO
@@ -83,21 +59,14 @@ def calculaDiccionarioDistancia4(feature_vectors, ratio):
         # print("Estado del diccionadio de directorios "+ dirK+" : ")
         # print(diccionarioDirectorios)
         # print("fin")
-        for k2 in feature_vectors:
+        for k2 in imagenes:
 
             dirK2 = ayudaDirectorios.directorioImagen(k2)
             nomK2 = ayudaDirectorios.nombreImagen(k2)
             if(dirK !=dirK2):
-                diff =findDifference(feature_vectors[k] ,feature_vectors[k2])
-                print("La distancia de ", k, " con " ,k2, "es", diff)
+               listaResultados=comparaImagenes(k, k2, flags)
+               diccionarioImagen[dirK2 + nomK2]=listaResultados
 
-                if(diff<=ratio):
-                    diccionarioImagen[dirK2 +nomK2 ] =diff
-                # print("hola2")
-                # print(diccionarioImagen)
-                # print("Estado del diccionadio de directorios "+ dirK+" : ")
-                # print(diccionarioDirectorios)
-                # print("fin")
 
         # posible filtro aqui mas tarde
         #  print("diff es")
