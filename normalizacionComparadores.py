@@ -20,46 +20,125 @@ def obtieneMaxComparadores(resultados, flags):
     #se crea una lista para guardar los maximos resultados de cada comparador, en caso de que no haya
     #un comparador el maximo se marca como 1
     maximos=[]
-    for flag in flags:
-        if (flag==1):
-            maximos.append(0)
-        else:
-            maximos.append(1)
+    longListaMax=flags.count(1)
+    for i in range(longListaMax):
+        maximos.append(0)
 
-    for sublista in  resultados:
-        comparador=sublista[0]
-        resultado=sublista[1]
-        if(comparador=="escalaGrises"):
-            if (resultado> maximos[0]) : maximos[0]=resultado
-        if (comparador == "normalizado"):
-            if (resultado > maximos[1]): maximos[1] = resultado
+    for resultado in  resultados:
+        cont = 0
+        for sublista in resultado:
 
-        if (comparador == "clahe"):
-            if (resultado > maximos[2]): maximos[2] = resultado
+            comparador=sublista[0]
+            resultado=sublista[1]
 
-        if (comparador == "hog"):
-            if (resultado > maximos[3]): maximos[3] = resultado
+            #if flags [0]==1  d
+            if(comparador=="escalaGrises"):
+                if (resultado> maximos[cont]) :
+                    maximos[cont]=resultado
+                    print("llego a el if de escalagrises con resultado y cont" )
+                    print(resultado)
+                    print(cont)
+                cont=cont+1
 
-        if (comparador == "gabor"):
-            if (resultado > maximos[4]): maximos[4] = resultado
-        if (comparador == "sift_sim"):
-            if (resultado > maximos[5]): maximos[5] = resultado
-        if (comparador == "ssim"):
-            if (resultado > maximos[6]): maximos[6] = resultado
-        if (comparador == "mse"):
-            if (resultado > maximos[7]): maximos[7] = resultado
-        if (comparador == "gabor_sift_sim"):
-            if (resultado > maximos[8]): maximos[8] = resultado
+            if (comparador == "normalizado"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                cont=cont+1
+
+            if (comparador == "clahe"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                cont=cont+1
+
+
+            if (comparador == "hog"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                cont=cont+1
+
+
+            if (comparador == "gabor"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                cont=cont+1
+
+            if (comparador == "sift_sim"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                cont=cont+1
+
+
+            if (comparador == "ssim"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                cont=cont+1
+
+
+            if (comparador == "mse"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                cont=cont+1
+
+
+
+            if (comparador == "gabor_sift_sim"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                cont=cont+1
+
+
     return maximos
 
 
 
-maximos=obtieneMaxComparadores([['escalaGrises', 0.48973268], ['normalizado', 0.30431348], ['clahe', 0.49163023], ['gabor', 0.32423025], ['sift_sim', 0.7329192546583851], ['mse', 26264.01004464286], ['gabor_sift_sim', 0.04195804195804196]],[1,1,1,1,1,1,0,1,1])
-print(maximos)
+#maximos=obtieneMaxComparadores([['escalaGrises', 0.48973268], ['normalizado', 0.30431348], ['clahe', 0.49163023], ['gabor', 0.32423025], ['sift_sim', 0.7329192546583851], ['mse', 26264.01004464286], ['gabor_sift_sim', 0.04195804195804196]],[1,1,1,1,1,1,0,1,1])
+#print(maximos)
 
 
 
 
 #funcion que dado un diccionario global devuelve una lista de todos los subdicionarios con profundidad 2
-def obtieneResultadosGlobales(diccionarioGlobal):
+def sacarLista (dir, lista):
+    for key, value in dir.items():
+        #print(value)
+        if isinstance(value, list):
+            lista.append(value)
+        else:
+            sacarLista(value, lista)
+
+    return lista
+
+
+
+#def aplicaNormalizacion
+#dado un diccionario global aplica a cada sublista [comparador, valor] una modificacion -> [comparador , valor/max]
+def aplicaNormalizacion(diccionarioGlobal , maximos):
+    for key, value in diccionarioGlobal.items():
+        #print(value)
+        if isinstance(value, list):
+            #LLEGO A LA LISTA DE SUBLISTAS
+            #para cada sublista le aplico el valor de maximos
+            cont=0
+            for sublista in value:
+                sublista[1]=sublista[1]/maximos[cont]
+                cont=cont+1
+
+        else:
+            aplicaNormalizacion(value, maximos)
+
+    return diccionarioGlobal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

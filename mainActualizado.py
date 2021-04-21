@@ -1,8 +1,8 @@
+from textwrap import indent
+
 import ayudaDirectorios
 from diccionarioGlobal import calculaDiccionario
-from normalizacionComparadores import obtieneMaxComparadores
-
-
+from normalizacionComparadores import obtieneMaxComparadores, sacarLista, aplicaNormalizacion
 
 #Se obtienen los subdirectorios de el Directorio general "directorios"
 directorios = ayudaDirectorios.obtenerDirectorios()
@@ -17,10 +17,20 @@ for directorio in directorios:
 
 diccionarioGlobal=calculaDiccionario(imagenes, [1,1,1,1,1,1,0,1,1])
 
+
+ayudaDirectorios.pretty(diccionarioGlobal)
+
+##############NORMALIZACION##############################################################################
 #a este diccionario global hay que sacarle todas las listas de subdiccionarios y fusionarlos en una lista
 #para sacar el maximo
 
-#obtieneMaxComparadores(lista,  [1,1,1,1,1,1,0,1,1])
+lista=[]
+#saco lso maximos de cada comparador
+lista=sacarLista(diccionarioGlobal, lista)
+maximos=obtieneMaxComparadores(lista, [1,1,1,1,1,1,0,1,1])
+print(maximos)
+#aplico el normalizado con esos maximos
+diccionarioGlobalNormalizado=aplicaNormalizacion(diccionarioGlobal, maximos)
+ayudaDirectorios.pretty(diccionarioGlobalNormalizado)
 
 
-ayudaDirectorios.pretty(diccionarioGlobal)
