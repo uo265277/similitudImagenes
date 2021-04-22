@@ -23,11 +23,11 @@ def predice(img, model: Model):
 def findDifference(f1, f2):
     return np.linalg.norm(f1-f2)
 
+model = ResNet50(weights='imagenet')
 
 def escalaGrises(img_path, img_path2):
     print("estoy en escala grises")
-    model = ResNet50(weights='imagenet')
-
+    global  model
     # Reading the image from the present directory
     image = cv2.imread(img_path)
     # Resizing the image for compatibility
@@ -50,8 +50,7 @@ def normalizado(img_path, img_path2):
     print("estoy en normalizado")
 
 
-    model = ResNet50(weights='imagenet')
-
+    global model
     # Reading the image from the present directory
     image = cv2.imread(img_path)
     # Resizing the image for compatibility
@@ -74,8 +73,7 @@ def normalizado(img_path, img_path2):
 def clahe(img_path, img_path2):
     print("estoy en clahe")
 
-    model = ResNet50(weights='imagenet')
-
+    global model
     image = cv2.imread(img_path)
     image2 = cv2.imread(img_path2)
     image = cv2.resize(image, (224, 224))
@@ -91,8 +89,7 @@ def clahe(img_path, img_path2):
 def hog(img_path, img_path2):
     print("estoy en hog")
 
-    model = ResNet50(weights='imagenet')
-
+    global model
     img = cv2.imread(img_path)
     img2 = cv2.imread(img_path2)
     # resizing image
@@ -109,8 +106,7 @@ def hog(img_path, img_path2):
 def gabor(img_path, img_path2):
     print("estoy en gabor")
 
-    model = ResNet50(weights='imagenet')
-
+    global model
     g_kernel = cv2.getGaborKernel((21, 21), 8.0, 4 * np.pi / 4, 10.0, 0.5, 0, ktype=cv2.CV_32F)
     img = cv2.imread(img_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
