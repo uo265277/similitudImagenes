@@ -7,12 +7,13 @@ def recortar (path):
     alto = img.shape[0]
     ancho = img.shape[1]
     crop_img = img[int(alto/4):int(3*alto/4),int(ancho/4):int(3*ancho/4)]
-    recortado="recortado"
-    nombre=path.split(".")
-    print(nombre[0])
-    nuevopath=nombre[0]+recortado+".jpg"
-    print(nuevopath)
-    cv2.imwrite(nuevopath, crop_img)
+    return crop_img
+    #recortado="recortado"
+    #nombre=path.split(".")
+    #print(nombre[0])
+    #nuevopath=nombre[0]+recortado+".jpg"
+    #print(nuevopath)
+    #cv2.imwrite(nuevopath, crop_img)
     #os.remove(path)
 
 
@@ -50,42 +51,42 @@ def modificaColor(path, nivelRealce, color):
         redEnhanced = (((red <= (255 - delta)).astype(np.uint8)) * (red + delta)) + (
             (red > (255 - delta)).astype(np.uint8)) * 255
         # nueva imagen con rojo incrementado
-        redEnhancedImage = cv2.merge([blue, green, redEnhanced])
+        Image = cv2.merge([blue, green, redEnhanced])
 
-        rojoModificado = "RojoModificado"
-        nombre = path.split(".")
-        print(nombre[0])
-        nuevopath = nombre[0] + rojoModificado + ".jpg"
-        print(nuevopath)
+        # rojoModificado = "RojoModificado"
+        # nombre = path.split(".")
+        # print(nombre[0])
+        # nuevopath = nombre[0] + rojoModificado + ".jpg"
+        # print(nuevopath)
         #cv2.imwrite(nuevopath, redEnhancedImage)
     if (color == "verde"):
         # banda verde incrementada
         greenEnhanced = (((green <= (255 - delta)).astype(np.uint8)) * (green + delta)) + (
             (green > (255 - delta)).astype(np.uint8)) * 255
         # nueva imagen con verde incrementado
-        greenEnhancedImage = cv2.merge([blue, greenEnhanced, red])
+        Image = cv2.merge([blue, greenEnhanced, red])
 
-        verdeModificado = "VerdeModificado"
-        nombre = path.split(".")
-        print(nombre[0])
-        nuevopath = nombre[0] + verdeModificado + ".jpg"
-        print(nuevopath)
+        # verdeModificado = "VerdeModificado"
+        # nombre = path.split(".")
+        # print(nombre[0])
+        # nuevopath = nombre[0] + verdeModificado + ".jpg"
+        # print(nuevopath)
         #cv2.imwrite(nuevopath, greenEnhancedImage)
     if (color == "azul"):
         # banda azul incrementada
         blueEnhanced = (((blue <= (255 - delta)).astype(np.uint8)) * (blue + delta)) + (
             (blue > (255 - delta)).astype(np.uint8)) * 255
         # nueva imagen con azul incrementado
-        blueEnhancedImage = cv2.merge([blueEnhanced, green, red])
+        Image = cv2.merge([blueEnhanced, green, red])
 
-        azulModificado = "AzulModificado"
-        nombre = path.split(".")
-        print(nombre[0])
-        nuevopath = nombre[0] + azulModificado + ".jpg"
-        print(nuevopath)
+        # azulModificado = "AzulModificado"
+        # nombre = path.split(".")
+        # print(nombre[0])
+        # nuevopath = nombre[0] + azulModificado + ".jpg"
+        # print(nuevopath)
         #cv2.imwrite(nuevopath, blueEnhancedImage)
     #os.remove(path)
-
+    return Image
 
 #modificaColor(path, 40, "azul")
 #modificaColor(path, 40, "verde")
@@ -163,14 +164,14 @@ def escalaGrises(path):
     # The initial processing of the image
     # image = cv2.medianBlur(image, 3)
     image_bw = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    escalaGrises= "EscalaGrises"
-    nombre = path.split(".")
-    print(nombre[0])
-    nuevopath = nombre[0] + escalaGrises + ".jpg"
-    print(nuevopath)
-    cv2.imwrite(nuevopath, image_bw)
+    # escalaGrises= "EscalaGrises"
+    # nombre = path.split(".")
+    # print(nombre[0])
+    # nuevopath = nombre[0] + escalaGrises + ".jpg"
+    # print(nuevopath)
+    # cv2.imwrite(nuevopath, image_bw)
     #os.remove(path)
-
+    return image_bw
 
 #escalaGrises(path)
 

@@ -13,17 +13,17 @@ from datasetModificado.modificaImagen import recortar, escalaGrises, modificaCol
 from normalizacionComparadores import obtieneMaxComparadores
 from pruebaComparativas import comparaImagenes
 
+#modificacion necesario: añacdir la phase correlation entre imagenes recortadas
 
-def calculoRangos(path, flags):
+def calcularRangos(path, flags, tolerancia):
     #obtengo una serie de modificaciones para la imagen
     #blanco y negro
-    #recorte
     #filtro (modificacion de un canal de color)
     original = cv2.imread(path)
     #obtengo la lista de resultados de comparadores
-    imgRecortada=recortar(path)
-    pathRecortada="calculoRangos/imgRecortada.jpg"
-    cv2.imwrite(pathRecortada, imgRecortada)
+    #imgRecortada=recortar(path)
+    #pathRecortada="calculoRangos/imgRecortada.jpg"
+    #cv2.imwrite(pathRecortada, imgRecortada)
 
     imgByN=escalaGrises(path)
     pathByN = "calculoRangos/imgByN.jpg"
@@ -33,13 +33,14 @@ def calculoRangos(path, flags):
     pathColorMod = "calculoRangos/imgColorMod.jpg"
     cv2.imwrite(pathColorMod, imgColorMod)
 
-    #el rango para cada comparador es [ 0, max(resultado aproximado a 2 decimales)]
-    resultRecortada=comparaImagenes(path,pathRecortada,flags)
+    #el rango para cada comparador es [ 0, max(resultado + tolerancia aproximado a 2 decimales)]
+    #resultRecortada=comparaImagenes(path,pathRecortada,flags)
     resultByN=comparaImagenes(path,pathByN,flags)
     resultColorMod=comparaImagenes(path,pathColorMod,flags)
 
-    resultados=[ resultRecortada,resultByN,resultColorMod]
+    resultados=[resultByN,resultColorMod]
     maximos=obtieneMaxComparadores(resultados, flags)
-
+    for max in maximos:
+        max=round(max+tolerancia, 2)
 
     return maximos

@@ -1,9 +1,12 @@
+import os
+import random
 from textwrap import indent
 
 import ayudaDirectorios
+from calculoRangos import calcularRangos
 from diccionarioGlobal import calculaDiccionario
 from normalizacionComparadores import obtieneMaxComparadores, sacarLista, aplicaNormalizacion
-
+#en esta parte se sacan con
 #Se obtienen los subdirectorios de el Directorio general "directorios"
 directorios = ayudaDirectorios.obtenerDirectorios()
 
@@ -26,8 +29,18 @@ for directorio in directorios:
 flags=[1,1,1,0,1,1,0,1,0]
 
 
-#sacar
+#sacar rangos con una imagen aletoria de un directorio, quiza la primera
+dirAleatorio=random.choices(directorios)
+dirAleatorio=dirAleatorio.pop()
+pathAleatorio=random.choices(ayudaDirectorios.getAllFilesInDirectory("directorios/"+dirAleatorio))
+pathAleatorio=pathAleatorio.pop()
+print(pathAleatorio)
+print("traza")
+#siendo rangos una lista con los maximos de cada comparador
+rangos= calcularRangos(pathAleatorio, flags, 0.05)
 
+print("los rangos elegidos son:")
+print(rangos)
 
 diccionarioGlobal=calculaDiccionario(imagenes, flags)
 

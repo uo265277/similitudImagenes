@@ -152,6 +152,7 @@ def ssim(img_path, img_path2):
     image2 = cv2.resize(img2, (224, 224))
     #multichannel a true ya que es imagen a color
     s = measure.compare_ssim(image, image2, multichannel=True)
+    return s
 
 def mse(img_path, img_path2):
     # the 'Mean Squared Error' between the two images is the
