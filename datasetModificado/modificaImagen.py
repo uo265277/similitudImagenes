@@ -7,14 +7,13 @@ def recortar (path):
     alto = img.shape[0]
     ancho = img.shape[1]
     crop_img = img[int(alto/4):int(3*alto/4),int(ancho/4):int(3*ancho/4)]
-    return crop_img
-    #recortado="recortado"
-    #nombre=path.split(".")
-    #print(nombre[0])
-    #nuevopath=nombre[0]+recortado+".jpg"
-    #print(nuevopath)
-    #cv2.imwrite(nuevopath, crop_img)
+    recortado="recortado"
+    nombre=path.split(".")
+    nuevopath=nombre[0]+recortado+".jpg"
+    cv2.imwrite(nuevopath, crop_img)
     #os.remove(path)
+    return crop_img
+
 
 
 
