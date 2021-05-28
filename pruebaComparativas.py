@@ -1,5 +1,5 @@
 
-from flags import escalaGrises, normalizado, clahe, hog, gabor, sift_sim, ssim, mse, gabor_sift_sim, psnr
+from flags import escalaGrises, normalizado, clahe, hog, gabor, sift_sim, ssim, mse, gabor_sift_sim, psnr, lsh
 
 
 #flags
@@ -79,12 +79,16 @@ def comparaImagenes(path1, path2, flags):
                 result9 = psnr(path1, path2)
                 list9 = [string9, result9]
                 listaResultados.append(list9)
-    #AÑADIR AQUI LSH
-
+    #flag lsh activado
+            if (flags[10] == 1):
+                string10 = "lsh"
+                result10 = lsh(path1, path2)
+                list10 = [string10, result10]
+                listaResultados.append(list10)
 
 
     return listaResultados
 
 
-listaResultados=comparaImagenes("directorios/IMAGEN1/IMAGEN1_original.jpg", "directorios/IMAGEN1/IMAGEN1_parecida.jpg", [1,1,1,1,1,1,1,1,1,1])
+listaResultados=comparaImagenes("directorios/IMAGEN1/IMAGEN1_original.jpg", "directorios/IMAGEN1/IMAGEN1_original.jpg", [1,1,1,1,1,1,1,1,1,1,1])
 print(listaResultados)

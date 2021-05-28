@@ -10,6 +10,12 @@ from skimage import measure
 from skimage import feature
 import math
 import tensorflow as tf
+from typing import Dict, List, Optional, Tuple
+
+import imagehash
+import numpy as np
+from PIL import Image
+
 
 def predice(img, model: Model):
     #print("llego a predice")
@@ -212,9 +218,110 @@ def psnr(img_path, img_path2):
     original = cv2.resize(original, (224, 224))
     compressed = cv2.resize(compressed, (224, 224))
     mse = np.mean((original - compressed) ** 2)
-    # if (mse == 0):  # MSE is zero means no noise is present in the signal .
+    if (mse == 0):  # MSE is zero means no noise is present in the signal .
         # Therefore PSNR have no importance.
-    #    return 0
+        return 0
     max_pixel = 255.0
     psnr = 20 * math.log10(max_pixel / math.sqrt(mse))
     return psnr
+
+
+
+
+def calculate_signature(image_file: str, hash_size: int) -> np.ndarray:
+    """
+    Calculate the dhash signature of a given file
+
+    Args:
+        image_file: the image (path as string) to calculate the signature for
+        hash_size: hash size to use, signatures will be of length hash_size^2
+
+    Returns:
+        Image signature as Numpy n-dimensional array or None if the file is not a PIL recognized image
+    """
+    try:
+        pil_image = Image.open(image_file).convert("L").resize(
+            (hash_size + 1, hash_size),
+            Image.ANTIALIAS)
+        dhash = imagehash.dhash(pil_image, hash_size)
+        signature = dhash.hash.flatten()
+        pil_image.close()
+        return signature
+    except IOError as e:
+        raise e
+
+
+
+
+
+#lsh (path1, path2, threshold, hash_size, bands
+def lsh(img_path1,img_path2):
+    threshold = 0.0
+    hash_size = 8
+    bands = 10
+
+    rows: int = int(hash_size ** 2 / bands)
+    signatures = dict()
+    hash_buckets_list: List[Dict[str, List[str]]] = [dict() for _ in range(bands)]
+
+    #calculo la firma de la primera imagen
+    signature = calculate_signature(img_path1, hash_size)
+    print("calculo la firma de "+img_path1)
+
+    # Keep track of each image's signature
+    signatures[img_path1] = np.packbits(signature)
+
+    # Locality Sensitive Hashing
+    for i in range(bands):
+            signature_band = signature[i * rows:(i + 1) * rows]
+            signature_band_bytes = signature_band.tostring()
+            if signature_band_bytes not in hash_buckets_list[i]:
+                hash_buckets_list[i][signature_band_bytes] = list()
+            hash_buckets_list[i][signature_band_bytes].append(img_path1)
+
+    signature2 = calculate_signature(img_path2, hash_size)
+    print("calculo la firma de " + img_path2)
+
+    # Keep track of each image's signature
+    signatures[img_path2] = np.packbits(signature2)
+
+    # Locality Sensitive Hashing
+    for i in range(bands):
+        signature_band = signature2[i * rows:(i + 1) * rows]
+        signature_band_bytes = signature_band.tostring()
+        if signature_band_bytes not in hash_buckets_list[i]:
+            hash_buckets_list[i][signature_band_bytes] = list()
+        hash_buckets_list[i][signature_band_bytes].append(img_path2)
+
+    # Build candidate pairs based on bucket membership
+    candidate_pairs = set()
+    for hash_buckets in hash_buckets_list:
+        for hash_bucket in hash_buckets.values():
+            if len(hash_bucket) > 1:
+                hash_bucket = sorted(hash_bucket)
+                for i in range(len(hash_bucket)):
+                    for j in range(i + 1, len(hash_bucket)):
+                        candidate_pairs.add(
+                            tuple([hash_bucket[i], hash_bucket[j]])
+                        )
+
+    # Check candidate pairs for similarity
+    near_duplicates = list()
+    for cpa, cpb in candidate_pairs:
+        hd = sum(np.bitwise_xor(
+            np.unpackbits(signatures[cpa]),
+            np.unpackbits(signatures[cpb])
+        ))
+        similarity = (hash_size ** 2 - hd) / hash_size ** 2
+        if similarity > threshold:
+            near_duplicates.append((cpa, cpb, 1-similarity))
+    near_duplicates.sort(key=lambda x: x[2], reverse=True)
+
+    if (len(near_duplicates) != 0):
+       return near_duplicates[0][2]
+    else:
+        return 1
+
+
+
+

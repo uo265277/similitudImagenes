@@ -9,6 +9,7 @@
 # 8 gabor_sift_sim
 import cv2
 
+
 from datasetModificado.modificaImagen import recortar, escalaGrises, modificaColor
 from normalizacionComparadores import obtieneMaxComparadores
 from pruebaComparativas import comparaImagenes
