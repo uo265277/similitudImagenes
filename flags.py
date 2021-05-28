@@ -1,13 +1,15 @@
 import cv2
+from tensorflow import keras
 import numpy as np
 import skimage
-from keras.models import Model
-from keras.preprocessing import image
-from keras.applications.resnet50 import preprocess_input, decode_predictions
-from keras.applications.resnet50 import ResNet50
+from tensorflow.keras.models import Model
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
+from tensorflow.keras.applications.resnet50 import ResNet50
 from skimage import measure
 from skimage import feature
-
+import math
+import tensorflow as tf
 
 def predice(img, model: Model):
     #print("llego a predice")
@@ -142,7 +144,7 @@ def sift_sim(path_a, path_b):
   resultado = len(similar_regions) / len(matches)
   if len(matches) < 16:
     return 0
-  return resultado
+  return 1-resultado
 
 
 def ssim(img_path, img_path2):
@@ -152,7 +154,7 @@ def ssim(img_path, img_path2):
     image2 = cv2.resize(img2, (224, 224))
     #multichannel a true ya que es imagen a color
     s = measure.compare_ssim(image, image2, multichannel=True)
-    return s
+    return 1-s
 
 def mse(img_path, img_path2):
     # the 'Mean Squared Error' between the two images is the
@@ -202,4 +204,17 @@ def gabor_sift_sim(img_path, img_path2):
     resultado = len(similar_regions) / len(matches)
     if len(matches) < 16:
         return 0
-    return resultado
+    return 1-resultado
+
+def psnr(img_path, img_path2):
+    original = cv2.imread(img_path)
+    compressed = cv2.imread(img_path2)
+    original = cv2.resize(original, (224, 224))
+    compressed = cv2.resize(compressed, (224, 224))
+    mse = np.mean((original - compressed) ** 2)
+    # if (mse == 0):  # MSE is zero means no noise is present in the signal .
+        # Therefore PSNR have no importance.
+    #    return 0
+    max_pixel = 255.0
+    psnr = 20 * math.log10(max_pixel / math.sqrt(mse))
+    return psnr
