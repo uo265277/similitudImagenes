@@ -1,5 +1,6 @@
 
-from flags import escalaGrises, normalizado, clahe, hog, gabor, sift_sim, ssim, mse, gabor_sift_sim, psnr, lsh
+from flags import escalaGrises, normalizado, clahe, hog, gabor, sift_sim, ssim, mse, gabor_sift_sim, psnr, lsh, \
+    histogramaColor
 
 
 #flags
@@ -14,7 +15,7 @@ from flags import escalaGrises, normalizado, clahe, hog, gabor, sift_sim, ssim, 
 # 8 gabor + sift sim
 #9 psnr
 #10 lsh
-
+#11 histograma color
 
 
 def comparaImagenes(path1, path2, flags):
@@ -85,10 +86,15 @@ def comparaImagenes(path1, path2, flags):
                 result10 = lsh(path1, path2)
                 list10 = [string10, result10]
                 listaResultados.append(list10)
-
+    #flag histograma color activado
+            if (flags[11] == 1):
+                string11 = "histogramaColor"
+                result11 = histogramaColor(path1, path2)
+                list11 = [string11, result11]
+                listaResultados.append(list11)
 
     return listaResultados
 
 
-listaResultados=comparaImagenes("directorios/IMAGEN1/IMAGEN1_original.jpg", "directorios/IMAGEN1/IMAGEN1_original.jpg", [1,1,1,1,1,1,1,1,1,1,1])
+listaResultados=comparaImagenes("directorios/IMAGEN1/IMAGEN1_original.jpg", "directorios/IMAGEN1/IMAGEN1_original.jpg", [1,1,1,1,1,1,1,1,1,1,1,1])
 print(listaResultados)

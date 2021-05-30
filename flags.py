@@ -325,3 +325,22 @@ def lsh(img_path1,img_path2):
 
 
 
+def histogramaColor(img_path, img_path2):
+
+    original = img_path
+    comparada = img_path2
+
+    image1 = cv2.imread(comparada)
+    image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
+    image2 = cv2.imread(original)
+    image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
+
+    image_list = [image1, image2]
+    histograms = [cv2.calcHist([img], [0], None, [256], [0, 256]) for img in image_list]
+    histn = [cv2.normalize(hist, hist).flatten() for hist in histograms]
+
+    result = cv2.compareHist(histn[0], histn[1], cv2.HISTCMP_CORREL)
+
+    result = 1 - result
+
+    return result
