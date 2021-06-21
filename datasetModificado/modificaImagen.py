@@ -1,3 +1,5 @@
+from random import random
+
 import cv2, numpy as np
 import os
 
@@ -16,6 +18,14 @@ def recortar (path):
 
 
 
+def recorte(img,pctx,pcty):
+    #tamaño recortado
+    rx=int(img.shape[0]*random.uniform(pctx,1))
+    ry=int(img.shape[1]*random.uniform(pcty,1))
+    #esquina sup izq recorte
+    offsetx=random.randint(0,img.shape[0]-rx)
+    offsety=random.randint(0,img.shape[1]-ry)
+    return img[offsetx:offsetx+rx,offsety:offsety+ry,:]
 
 def rotar(path):
     original = cv2.imread(path)

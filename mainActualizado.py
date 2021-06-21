@@ -1,21 +1,21 @@
-import os
 import random
-from textwrap import indent
-
 import ayudaDirectorios
-from calculoRangos import calcularRangos
+from calculoRangos import calcularRangos, rangosPrefijados, rangosImagenesIndividuales, rangosImagenesAleatorias
 from diccionarioGlobal import calculaDiccionario
 from normalizacionComparadores import obtieneMaxComparadores, sacarLista, aplicaNormalizacion
-#en esta parte se sacan con
-#Se obtienen los subdirectorios de el Directorio general "directorios"
+
+
+#1.Se obtienen los subdirectorios de el Directorio general "directorios"
 directorios = ayudaDirectorios.obtenerDirectorios()
 
-#se recorre cada subdirectorio y se añade -> PATH_IMAGEN
+#1. Se recorre cada subdirectorio y se añade el path de cada imagen a la lista imagenes
 imagenes=[]
 for directorio in directorios:
     print("recorro el directorio "+directorio)
     for img_path in ayudaDirectorios.getAllFilesInDirectory("directorios/"+directorio):
         imagenes.append(img_path)
+
+#3.Se eligen los diferentes métodos a emplear mediante la estructura flags
 #flags
 # 0 escalagrises
 # 1 normalizado
@@ -25,39 +25,40 @@ for directorio in directorios:
 # 5 sift_sim
 # 6 ssim
 # 7 mse
-# 8 gabor_sift_sim
-flags=[1,1,1,0,1,1,0,1,0]
+# 8 gabor + sift sim
+# 9 psnr
+# 10 lsh
+# 11 histograma color
+
+#*****************************************ELEGIR FLAGS******************************************************************
+flags=[1,1,1,1,1,1,1,1,1,1,1,1]
+if (len(flags) !=11):
+    raise AssertionError()
+#***********************************************************************************************************************
 
 
-#sacar rangos con una imagen aletoria de un directorio, quiza la primera
-dirAleatorio=random.choices(directorios)
-dirAleatorio=dirAleatorio.pop()
-pathAleatorio=random.choices(ayudaDirectorios.getAllFilesInDirectory("directorios/"+dirAleatorio))
-pathAleatorio=pathAleatorio.pop()
-print(pathAleatorio)
-print("traza")
-#siendo rangos una lista con los maximos de cada comparador
-rangos= calcularRangos(pathAleatorio, flags, 0.05)
+#4. Se elige la forma de obtener los rangos:
+# a)- Rangos prefijados
+# b)- Rangos obtenidos para cada imagen mediante su comparativa con modificaciones automáticas para esa imagen
+# c)- Rangos obtenidos para un número prefijado de imágenes del dataset  mediante su comparativa con modificaciones
+#       automáticas para esas imágenes
 
-print("los rangos elegidos son:")
-print(rangos)
+#****************************************ELEGIR OPCIÓN RANGOS***********************************************************
+# Elegir opcion
+opcion="c"
+#***********************************************************************************************************************
+if(opcion=="a"): rangosPrefijados(flags)
+elif(opcion=="b"): rangosImagenesIndividuales(flags)
+elif(opcion=="c"):
+    muestras=3
+    rangosImagenesAleatorias(flags, muestras, directorios)
+else: raise AssertionError()
 
+#5. Tras calcular los rangos de similitud por comparador se procede a comparar cada imagen de un directorio con las demás
+# imágenes dando como resultado un diccionario con las posibles copias
+# tambien se genera un archivo txt con un informe de los posibles plagios
 diccionarioGlobal=calculaDiccionario(imagenes, flags)
-
-
 ayudaDirectorios.pretty(diccionarioGlobal)
 
-##############NORMALIZACION##############################################################################
-#a este diccionario global hay que sacarle todas las listas de subdiccionarios y fusionarlos en una lista
-#para sacar el maximo
-
-lista=[]
-#saco lso maximos de cada comparador
-lista=sacarLista(diccionarioGlobal, lista)
-maximos=obtieneMaxComparadores(lista, flags)
-print(maximos)
-#aplico el normalizado con esos maximos
-diccionarioGlobalNormalizado=aplicaNormalizacion(diccionarioGlobal, maximos)
-ayudaDirectorios.pretty(diccionarioGlobalNormalizado)
 
 
