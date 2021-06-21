@@ -6,7 +6,7 @@ from os.path import isfile, join
 
 
 def directorioImagen(imagen):
-    # -2 porque es el tercer subdirectorio: /content/directorios/dir2/bear.jpg
+    # -2 porque es el tercer subdirectorio: /content/pruebas_directorio/dir2/bear.jpg
     directorio =imagen.split('/')[-2]
     return directorio
 
@@ -15,7 +15,7 @@ def directorioImagen(imagen):
 
 # obtiene el nombre de una imagen dado su path
 def nombreImagen(imagen):
-    # -1 porque es lo ultimo a obtener: /content/directorios/dir2/bear.jpg
+    # -1 porque es lo ultimo a obtener: /content/pruebas_directorio/dir2/bear.jpg
     nombre =imagen.split('/')[-1]
     return nombre
 
@@ -25,7 +25,7 @@ def nombreImagen(imagen):
 
 def pathSinImagen(path):
 
-    # -2 porque es el tercer subdirectorio: /content/directorios/dir2/bear.jpg
+    # -2 porque es el tercer subdirectorio: /content/pruebas_directorio/dir2/bear.jpg
     imagen =path.split('/')[-1]
 
     solodir =path.replace(imagen, "")
@@ -50,7 +50,7 @@ def vectorDirectorios(feature_vectors):
 
 
 # *******************************************************************************
-# obtiene los subdirectorios de la carpeta directorios
+# obtiene los subdirectorios de la carpeta pruebas_directorio
 def obtenerDirectorios():
     contenido = os.listdir('directorios')
     return contenido

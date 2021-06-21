@@ -96,5 +96,5 @@ def comparaImagenes(path1, path2, flags):
     return listaResultados
 
 
-listaResultados=comparaImagenes("directorios/IMAGEN4/IMAGEN4_original.jpg", "directorios/IMAGEN4/IMAGEN4_parecida.jpg", [1,1,1,1,1,1,1,1,1,1,1,1])
-print(listaResultados)
+#listaResultados=comparaImagenes("pruebas_directorio/IMAGEN4/IMAGEN4_original.jpg", "pruebas_directorio/IMAGEN4/IMAGEN4_parecida.jpg", [1,1,1,1,1,1,1,1,1,1,1,1])
+#print(listaResultados)

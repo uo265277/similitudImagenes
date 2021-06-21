@@ -184,18 +184,18 @@ def find_near_duplicates(input_dir: str, threshold: float, hash_size: int, bands
     #                     help="hash size to use, signature length = hash_size^2", dest="hash_size")
     # parser.add_argument("-b", "--bands", type=int, default=16, help="number of bands")
 
-#datasetModificado.modificaImagen.recortar("/home/claudia/PycharmProjects/similitudImagenes/directorios/FRANK_PRUEBAS/B.jpg")
-#datasetModificado.modificaImagen.recortar("/home/claudia/PycharmProjects/similitudImagenes/directorios/FRANK_PRUEBAS/B_MOD1.jpg")
-#datasetModificado.modificaImagen.recortar("/home/claudia/PycharmProjects/similitudImagenes/directorios/FRANK_PRUEBAS/A.jpg")
+#datasetModificado.modificaImagen.recortar("/home/claudia/PycharmProjects/similitudImagenes/pruebas_directorio/FRANK_PRUEBAS/B.jpg")
+#datasetModificado.modificaImagen.recortar("/home/claudia/PycharmProjects/similitudImagenes/pruebas_directorio/FRANK_PRUEBAS/B_MOD1.jpg")
+#datasetModificado.modificaImagen.recortar("/home/claudia/PycharmProjects/similitudImagenes/pruebas_directorio/FRANK_PRUEBAS/A.jpg")
 
 
-input_dir = "/home/claudia/PycharmProjects/similitudImagenes/directorios/IMAGEN1/"
+input_dir = "/pruebas_directorio/IMAGEN1/"
 threshold = 0.0
 hash_size =8
 
 bands =10
 
-similitud= lsh("directorios/IMAGEN1/IMAGEN1_original.jpg", "directorios/IMAGEN1/IMAGEN1_rotadal.jpg", threshold, hash_size, bands)
+similitud= lsh("pruebas_directorio/IMAGEN1/IMAGEN1_original.jpg", "pruebas_directorio/IMAGEN1/IMAGEN1_rotadal.jpg", threshold, hash_size, bands)
 if(len(similitud)!=0):
     print(similitud[0][2])
 else:

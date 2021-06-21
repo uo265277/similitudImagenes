@@ -6,21 +6,21 @@ from diccionarioGlobal import calculaDiccionario
 #model = ResNet50(weights='imagenet')
 #imagenes: dict = {}
 
-#call(["pdfimages.exe", "-j", "pdf","directorios\\mapaches"])
+#call(["pdfimages.exe", "-j", "pdf","pruebas_directorio\\mapaches"])
 
 
 # model = MobileNet(weights='imagenet', include_top=False, input_shape=(224, 224, 3))
 # ¿como saco las imagenes de cada pdf y las añado a cada directorio? -> pdfimages para texto pdftxt
-# adaptar para que se compare cada imagen de dir x con cada imagen de los diferentes directorios
+# adaptar para que se compare cada imagen de dir x con cada imagen de los diferentes pruebas_directorio
 
-#Se obtienen los subdirectorios de el Directorio general "directorios"
+#Se obtienen los subdirectorios de el Directorio general "pruebas_directorio"
 directorios = ayudaDirectorios.obtenerDirectorios()
 #cont  =0
 #se recorre cada directorio y se añade a una lista la sublista -> [PATH_IMAGEN, DIRECTORIO_PADRE]
 imagenes=[]
 for directorio in directorios:
     print("recorro el directorio "+directorio)
-    for img_path in ayudaDirectorios.getAllFilesInDirectory("directorios/"+directorio):
+    for img_path in ayudaDirectorios.getAllFilesInDirectory("pruebas_directorio/"+directorio):
         #nombreFinal=ayudaDirectorios.pasarAJPG(img_path)
         #cont=cont+1
         sublista=[img_path,directorio]

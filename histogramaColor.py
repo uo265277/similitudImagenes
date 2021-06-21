@@ -6,8 +6,8 @@ import argparse
 import glob
 import cv2
 
-original="directorios/IMAGEN1/IMAGEN1_original.jpg"
-comparada="directorios/IMAGEN1/IMAGEN1_rotadal.jpg"
+original="pruebas_directorio/IMAGEN1/IMAGEN1_original.jpg"
+comparada="pruebas_directorio/IMAGEN1/IMAGEN1_rotadal.jpg"
 
 
 image1 = cv2.imread(comparada)

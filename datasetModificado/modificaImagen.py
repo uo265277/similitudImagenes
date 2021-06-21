@@ -18,7 +18,8 @@ def recortar (path):
 
 
 
-def recorte(img,pctx,pcty):
+def recorte(path,pctx,pcty):
+    img=cv2.imread(path)
     #tamaño recortado
     rx=int(img.shape[0]*random.uniform(pctx,1))
     ry=int(img.shape[1]*random.uniform(pcty,1))

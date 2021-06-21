@@ -22,8 +22,8 @@ class CorrelationCalculator(object):
 
 import cv2
 
-img = cv2.imread(r"/home/claudia/PycharmProjects/similitudImagenes/directorios/FRANK_PRUEBAS/B.jpg")
-img2 = cv2.imread(r"/home/claudia/PycharmProjects/similitudImagenes/directorios/FRANK_PRUEBAS/B_MOD1.jpg")
+img = cv2.imread(r"/pruebas_directorio/FRANK_PRUEBAS/B.jpg")
+img2 = cv2.imread(r"/pruebas_directorio/FRANK_PRUEBAS/B_MOD1.jpg")
 
 obj = CorrelationCalculator(img)
 print(obj)

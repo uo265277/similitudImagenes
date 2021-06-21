@@ -6,8 +6,8 @@ import flags
 import numpy as np
 from datasetModificado.modificaImagen import escalaGrises
 
-path1=r"/home/claudia/PycharmProjects/similitudImagenes/directorios/FRANK_PRUEBAS/B.jpg"
-path2=r"/home/claudia/PycharmProjects/similitudImagenes/directorios/FRANK_PRUEBAS/Brecortado.jpg"
+path1=r"/home/claudia/PycharmProjects/similitudImagenes/pruebas_directorio/FRANK_PRUEBAS/B.jpg"
+path2=r"/home/claudia/PycharmProjects/similitudImagenes/pruebas_directorio/FRANK_PRUEBAS/Brecortado.jpg"
 
 # print(flags.escalaGrises(path1, path2))
 # print(flags.normalizado(path1, path2))

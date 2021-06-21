@@ -136,20 +136,44 @@ def rangosPrefijados(flags):
 
 
 
-def rangosImagenesIndividuales(flags, directorios):
-    dirAleatorio = random.choices(directorios)
-    dirAleatorio = dirAleatorio.pop()
-    pathAleatorio = random.choices(ayudaDirectorios.getAllFilesInDirectory("directorios/" + dirAleatorio))
-    pathAleatorio = pathAleatorio.pop()
-    print(pathAleatorio)
-    print("traza")
-    # siendo rangos una lista con los maximos de cada comparador
-    rangos = calcularRangos(pathAleatorio, flags, 0.05)
+def rangosImagenesIndividuales(flags, path):
+    imgByN = escalaGrises(path)
+    pathByN = "calculoRangos/imgByN.jpg"
+    cv2.imwrite(pathByN, imgByN)
 
-    print("los rangos elegidos son:")
-    print(rangos)
+    imgColorMod = modificaColor(path, 150, "azul")
+    pathColorMod = "calculoRangos/imgColorMod.jpg"
+    cv2.imwrite(pathColorMod, imgColorMod)
+
+    # porcentajeMinimoCrop = 0.7
+    # imgRecortada = recorte(path, porcentajeMinimoCrop, porcentajeMinimoCrop)
+    # pathRecortada = "calculoRangos/imgRecortada.jpg"
+    # cv2.imwrite(pathRecortada, imgRecortada)
+
+    # el rango para cada comparador es [ 0, max(resultado + tolerancia aproximado a 2 decimales)]
+    # resultRecortada=comparaImagenes(path,pathRecortada,flags)
+    tolerancia=0.000
+    resultByN = comparaImagenes(path, pathByN, flags)
+    resultColorMod = comparaImagenes(path, pathColorMod, flags)
+    # resultRecortada = comparaImagenes(path, pathRecortada, flags)
+
+    resultados = [resultByN, resultColorMod]
+    maximos = obtieneMax(resultados, flags)
+    return maximos
 
 
+
+def obtieneMax(resultados,flags):
+    longListaMax=flags.count(1)
+    rangosMax=[]
+    i=0
+    while(i< longListaMax):
+            if (resultados[0][i][1] > resultados[1][i][1]):
+                rangosMax.append(resultados[0][i])
+            else:
+                rangosMax.append(resultados[1][i])
+            i=i+1
+    return rangosMax
 def rangosImagenesAleatorias(flags, muestras, directorios):
     dirAleatorio = random.choices(directorios)
     dirAleatorio = dirAleatorio.pop()
@@ -162,3 +186,24 @@ def rangosImagenesAleatorias(flags, muestras, directorios):
 
     print("los rangos elegidos son:")
     print(rangos)
+
+
+def estaEnRango(resultados, maximos):
+    lista1=[]
+    for sublista in resultados:
+        comparador=sublista[0]
+        valor=sublista[1]
+        lista1.append(valor)
+    lista2=[]
+    for sublista in maximos:
+        comparador=sublista[0]
+        valor=sublista[1]
+        lista2.append(valor)
+    i=0
+    pertenece=False
+    while(i<len(lista2)):
+        if (lista1[i]<lista2[i]):
+            pertenece=True
+        i=i+1
+    return pertenece
+

@@ -70,7 +70,7 @@ def calculaDiccionarioDistancia6(imagenes, ratio):
 
       # ASIGNO A LA CLAVE NOMK EL DICCIONARIO DE NOMK
       diccionarioDirectorios[dirK + nomK] = diccionarioImagen
-      # print("Estado del diccionadio de directorios "+ dirK+" : ")
+      # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
       # print(diccionarioDirectorios)
       # print("fin")
       for k2 in imagenes:
@@ -86,7 +86,7 @@ def calculaDiccionarioDistancia6(imagenes, ratio):
                              diccionarioImagen[dirK2 +nomK2 ] =sift_sim
           # print("hola2")
           # print(diccionarioImagen)
-          # print("Estado del diccionadio de directorios "+ dirK+" : ")
+          # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
           # print(diccionarioDirectorios)
           # print("fin")
 
@@ -286,15 +286,15 @@ def getAllFilesInDirectory(directoryPath: str):
 
 if __name__ == '__main__':
   imagenes: dict = {}
-  for path in getAllFilesInDirectory('directorios/CLAUDIA'):
+  for path in getAllFilesInDirectory('pruebas_directorio/CLAUDIA'):
     print(path)
     imagenes[path]=path
-  for path in getAllFilesInDirectory('directorios/MARIA'):
+  for path in getAllFilesInDirectory('pruebas_directorio/MARIA'):
     print(path)
     imagenes[path]=path
   # #img_a = os.path.abspath("datasetModificado\CLAUDIA\Claudia-001.jpg")
-  # img_a= "directorios/RAQUEL/Raquel-002.jpg"
-  # img_b= "directorios/CLAUDIA/Claudia-000.jpg"
+  # img_a= "pruebas_directorio/RAQUEL/Raquel-002.jpg"
+  # img_b= "pruebas_directorio/CLAUDIA/Claudia-000.jpg"
   # # get the similarity values
   # structural_sim2 = structural_sim(img_a, img_b)
   # pixel_sim2 = pixel_sim(img_a, img_b)
@@ -302,8 +302,8 @@ if __name__ == '__main__':
   # emd2 = earth_movers_distance(img_a, img_b)
   # print(structural_sim2, pixel_sim2, sift_sim2, emd2)
   #
-  # k="directorios/RAQUEL/Raquel-000.jpg"
-  # k2="directorios/RAQUEL/Raquel-000.jpg"
+  # k="pruebas_directorio/RAQUEL/Raquel-000.jpg"
+  # k2="pruebas_directorio/RAQUEL/Raquel-000.jpg"
   #
   # sift_sim = pruebaSiftSim(img_a, img_b)
   # print("El sift sim de ", k, " con ", k2, "es", sift_sim)

@@ -142,14 +142,14 @@ def sift_sim(path_a, path_b):
   # match.distance is a float between {0:100} - lower means more similar
   print(str(type(desc_a)) + str(type(desc_b)))
   if(str(type(desc_b))=="<class 'NoneType'>" or str(type(desc_a))=="<class 'NoneType'>"):
-    return 0
+    return 1
   #print(desc_b)
   #print(desc_a)
   matches = bf.match(desc_a, desc_b)
   similar_regions = [i for i in matches if i.distance < 60]
   resultado = len(similar_regions) / len(matches)
   if len(matches) < 16:
-    return 0
+    return 1
   return 1-resultado
 
 
@@ -174,7 +174,7 @@ def mse(img_path, img_path2):
     err /= float(imageA.shape[0] * imageA.shape[1])
     # return the MSE, the lower the error, the more "similar"
     # the two images are
-    return err
+    return err/10000
 
 
 
@@ -202,14 +202,14 @@ def gabor_sift_sim(img_path, img_path2):
     # match.distance is a float between {0:100} - lower means more similar
     #print(str(type(desc_a)) + str(type(desc_b)))
     if (str(type(desc_b)) == "<class 'NoneType'>" or str(type(desc_a)) == "<class 'NoneType'>"):
-        return 0
+        return 1
     #print(desc_b)
     #print(desc_a)
     matches = bf.match(desc_a, desc_b)
     similar_regions = [i for i in matches if i.distance < 60]
     resultado = len(similar_regions) / len(matches)
     if len(matches) < 16:
-        return 0
+        return 1
     return 1-resultado
 
 def psnr(img_path, img_path2):
@@ -223,7 +223,7 @@ def psnr(img_path, img_path2):
         return 0
     max_pixel = 255.0
     psnr = 20 * math.log10(max_pixel / math.sqrt(mse))
-    return psnr
+    return psnr/255
 
 
 

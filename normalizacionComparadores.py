@@ -21,9 +21,10 @@ def obtieneMaxComparadores(resultados, flags):
     #un comparador el maximo se marca como 1
     maximos=[]
     longListaMax=flags.count(1)
+    rangos=[]
     for i in range(longListaMax):
         maximos.append(0)
-
+        rangos.append("")
     for resultado in  resultados:
         cont = 0
         for sublista in resultado:
@@ -35,48 +36,53 @@ def obtieneMaxComparadores(resultados, flags):
             if(comparador=="escalaGrises"):
                 if (resultado> maximos[cont]) :
                     maximos[cont]=resultado
-                    print("llego a el if de escalagrises con resultado y cont" )
-                    print(resultado)
-                    print(cont)
+                    rangos[cont]=["escalaGrises",resultado]
                 cont=cont+1
 
             if (comparador == "normalizado"):
                 if (resultado > maximos[cont]):
                     maximos[cont] = resultado
+                    rangos[cont] = ["normalizado", resultado]
                 cont=cont+1
 
             if (comparador == "clahe"):
                 if (resultado > maximos[cont]):
                     maximos[cont] = resultado
+                    rangos[cont]=["clahe",resultado]
                 cont=cont+1
 
 
             if (comparador == "hog"):
                 if (resultado > maximos[cont]):
                     maximos[cont] = resultado
+                    rangos[cont]=["hog",resultado]
                 cont=cont+1
 
 
             if (comparador == "gabor"):
                 if (resultado > maximos[cont]):
                     maximos[cont] = resultado
+                    rangos[cont]=["gabor",resultado]
                 cont=cont+1
 
             if (comparador == "sift_sim"):
                 if (resultado > maximos[cont]):
                     maximos[cont] = resultado
+                    rangos[cont]=["sift_sim",resultado]
                 cont=cont+1
 
 
             if (comparador == "ssim"):
                 if (resultado > maximos[cont]):
                     maximos[cont] = resultado
+                    rangos[cont]=["ssim",resultado]
                 cont=cont+1
 
 
             if (comparador == "mse"):
                 if (resultado > maximos[cont]):
                     maximos[cont] = resultado
+                    rangos[cont]=["mse",resultado]
                 cont=cont+1
 
 
@@ -84,10 +90,28 @@ def obtieneMaxComparadores(resultados, flags):
             if (comparador == "gabor_sift_sim"):
                 if (resultado > maximos[cont]):
                     maximos[cont] = resultado
+                    rangos[cont]=["gabor_sift_sim",resultado]
                 cont=cont+1
 
+            if (comparador == "psnr"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                    rangos[cont]=["psnr",resultado]
+                cont=cont+1
 
-    return maximos
+            if (comparador == "lsh"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                    rangos[cont]=["lsh",resultado]
+                cont=cont+1
+
+            if (comparador == "histogramaColor"):
+                if (resultado > maximos[cont]):
+                    maximos[cont] = resultado
+                    rangos[cont]=["histogramaColor",resultado]
+                cont=cont+1
+
+    return rangos
 
 
 

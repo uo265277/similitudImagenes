@@ -8,7 +8,7 @@ from normalizacionComparadores import obtieneMaxComparadores, sacarLista, aplica
 #1.Se obtienen los subdirectorios de el Directorio general "directorios"
 directorios = ayudaDirectorios.obtenerDirectorios()
 
-#1. Se recorre cada subdirectorio y se añade el path de cada imagen a la lista imagenes
+#2. Se recorre cada subdirectorio y se añade el path de cada imagen a la lista imagenes
 imagenes=[]
 for directorio in directorios:
     print("recorro el directorio "+directorio)
@@ -32,7 +32,7 @@ for directorio in directorios:
 
 #*****************************************ELEGIR FLAGS******************************************************************
 flags=[1,1,1,1,1,1,1,1,1,1,1,1]
-if (len(flags) !=11):
+if (len(flags) !=12):
     raise AssertionError()
 #***********************************************************************************************************************
 
@@ -45,19 +45,20 @@ if (len(flags) !=11):
 
 #****************************************ELEGIR OPCIÓN RANGOS***********************************************************
 # Elegir opcion
-opcion="c"
+opcion="b"
 #***********************************************************************************************************************
-if(opcion=="a"): rangosPrefijados(flags)
-elif(opcion=="b"): rangosImagenesIndividuales(flags)
+maximos=[]
+if(opcion=="a"): maximos=rangosPrefijados(flags)
 elif(opcion=="c"):
     muestras=3
-    rangosImagenesAleatorias(flags, muestras, directorios)
-else: raise AssertionError()
+    maximos=rangosImagenesAleatorias(flags, muestras, directorios)
+if(opcion!="b" and opcion!="a" and opcion!="c"):
+    raise AssertionError()
 
 #5. Tras calcular los rangos de similitud por comparador se procede a comparar cada imagen de un directorio con las demás
 # imágenes dando como resultado un diccionario con las posibles copias
 # tambien se genera un archivo txt con un informe de los posibles plagios
-diccionarioGlobal=calculaDiccionario(imagenes, flags)
+diccionarioGlobal=calculaDiccionario(imagenes, flags, maximos, opcion)
 ayudaDirectorios.pretty(diccionarioGlobal)
 
 

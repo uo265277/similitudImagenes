@@ -121,7 +121,7 @@ def calculaDiccionarioDistancia(feature_vectors):
 # *******************************************************************************
 
 
-# igual que el anterior pero solo se comparan si estan en directorios diferentes
+# igual que el anterior pero solo se comparan si estan en pruebas_directorio diferentes
 def calculaDiccionarioDistancia2(feature_vectors):
     # entrada -> clave valor imagen y su vector
     # salida -> k, v siendo k imagen comparada con la imagen a;  y v la distancia euclidea
@@ -210,7 +210,7 @@ def calculaDiccionarioDistancia3(feature_vectors):
 
         # ASIGNO A LA CLAVE NOMK EL DICCIONARIO DE NOMK
         diccionarioDirectorios[dirK +nomK ]= diccionarioImagen
-        # print("Estado del diccionadio de directorios "+ dirK+" : ")
+        # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
         # print(diccionarioDirectorios)
         # print("fin")
         for k2 in feature_vectors:
@@ -224,7 +224,7 @@ def calculaDiccionarioDistancia3(feature_vectors):
                 diccionarioImagen[dirK2 +nomK2 ] =diff
                 # print("hola2")
                 # print(diccionarioImagen)
-                # print("Estado del diccionadio de directorios "+ dirK+" : ")
+                # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
                 # print(diccionarioDirectorios)
                 # print("fin")
 
@@ -296,7 +296,7 @@ def calculaDiccionarioDistancia4(feature_vectors, ratio):
 
         # ASIGNO A LA CLAVE NOMK EL DICCIONARIO DE NOMK
         diccionarioDirectorios[dirK +nomK ]= diccionarioImagen
-        # print("Estado del diccionadio de directorios "+ dirK+" : ")
+        # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
         # print(diccionarioDirectorios)
         # print("fin")
         for k2 in feature_vectors:
@@ -311,7 +311,7 @@ def calculaDiccionarioDistancia4(feature_vectors, ratio):
                     diccionarioImagen[dirK2 +nomK2 ] =diff
                 # print("hola2")
                 # print(diccionarioImagen)
-                # print("Estado del diccionadio de directorios "+ dirK+" : ")
+                # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
                 # print(diccionarioDirectorios)
                 # print("fin")
 
@@ -392,7 +392,7 @@ def calculaDiccionarioDistancia4(feature_vectors, ratio):
 #
 #         # ASIGNO A LA CLAVE NOMK EL DICCIONARIO DE NOMK
 #         diccionarioDirectorios[dirK +nomK ]= diccionarioImagen
-#         # print("Estado del diccionadio de directorios "+ dirK+" : ")
+#         # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
 #         # print(diccionarioDirectorios)
 #         # print("fin")
 #         for k2 in imagenes:
@@ -414,7 +414,7 @@ def calculaDiccionarioDistancia4(feature_vectors, ratio):
 #                     diccionarioImagen[dirK2 +nomK2 ] =diff
 #                 # print("hola2")
 #                 # print(diccionarioImagen)
-#                 # print("Estado del diccionadio de directorios "+ dirK+" : ")
+#                 # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
 #                 # print(diccionarioDirectorios)
 #                 # print("fin")
 #
@@ -483,7 +483,7 @@ def calculaDiccionarioDistancia6(imagenes, ratio):
 
         # ASIGNO A LA CLAVE NOMK EL DICCIONARIO DE NOMK
         diccionarioDirectorios[dirK +nomK ]= diccionarioImagen
-        # print("Estado del diccionadio de directorios "+ dirK+" : ")
+        # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
         # print(diccionarioDirectorios)
         # print("fin")
         for k2 in imagenes:
@@ -498,7 +498,7 @@ def calculaDiccionarioDistancia6(imagenes, ratio):
                     diccionarioImagen[dirK2 +nomK2 ] =diff
                 # print("hola2")
                 # print(diccionarioImagen)
-                # print("Estado del diccionadio de directorios "+ dirK+" : ")
+                # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
                 # print(diccionarioDirectorios)
                 # print("fin")
 

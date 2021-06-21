@@ -1,8 +1,9 @@
 import ayudaDirectorios
+from calculoRangos import estaEnRango, rangosImagenesIndividuales
 from pruebaComparativas import comparaImagenes
 
 
-def calculaDiccionario(imagenes, flags):
+def calculaDiccionario(imagenes, flags, maximos, opcion):
     # entrada -> lista de sublistas -> [PATH_IMAGEN, DIRECTORIO_PADRE]
 
     # CREO EL DICCIONARIO GLOBAL
@@ -56,7 +57,7 @@ def calculaDiccionario(imagenes, flags):
 
         # ASIGNO A LA CLAVE NOMK EL DICCIONARIO DE NOMK
         diccionarioDirectorios[dirK +nomK ]= diccionarioImagen
-        # print("Estado del diccionadio de directorios "+ dirK+" : ")
+        # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
         # print(diccionarioDirectorios)
         # print("fin")
         for k2 in imagenes:
@@ -65,7 +66,24 @@ def calculaDiccionario(imagenes, flags):
             nomK2 = ayudaDirectorios.nombreImagen(k2)
             if(dirK !=dirK2):
                listaResultados=comparaImagenes(k, k2, flags)
-               diccionarioImagen[dirK2 + nomK2]=listaResultados
+
+               if(opcion=="a" or opcion=="c"):
+                   #miro si alguno de esos resultados considera como plagio la imagen = resultado < maximo = resultado
+                   # pertenece a rango
+                   pertenece=estaEnRango(listaResultados,maximos)
+                   #si pertenece lo añado a resultados
+                   if(pertenece): diccionarioImagen[dirK2 + nomK2]=listaResultados
+
+               else:
+                   #en caso de estar en la opcion b, se individualiza los maximos por imagen
+                   maximos = rangosImagenesIndividuales(flags, k)
+                   pertenece = estaEnRango(listaResultados, maximos)
+                   # si pertenece lo añado a resultados
+                   if (pertenece): diccionarioImagen[dirK2 + nomK2] = listaResultados
+
+
+
+
 
 
         # posible filtro aqui mas tarde
@@ -73,3 +91,7 @@ def calculaDiccionario(imagenes, flags):
         #  print(diff)
         #  distancias[k]=diff
     return diccionarioGlobal
+
+
+
+
