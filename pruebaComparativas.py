@@ -51,43 +51,43 @@ def comparaImagenes(path1, path2, flags):
         list4 = [string4, result4]
         listaResultados.append(list4)
     #flag sift_sim activado
-        if (flags[5] == 1):
+    if (flags[5] == 1):
             string5 = "sift_sim"
             result5 = sift_sim(path1, path2)
             list5 = [string5, result5]
             listaResultados.append(list5)
     #flag sift_sim activado
-            if (flags[6] == 1):
+    if (flags[6] == 1):
                 string6 = "ssim"
                 result6 = ssim(path1, path2)
                 list6 = [string6, result6]
                 listaResultados.append(list6)
     #flag sme activado
-            if (flags[7] == 1):
+    if (flags[7] == 1):
                 string7= "mse"
                 result7 = mse(path1, path2)
                 list7 = [string7, result7]
                 listaResultados.append(list7)
     #flag GABOR+SIFT_SIM activado
-            if (flags[8] == 1):
+    if (flags[8] == 1):
                 string8= "gabor_sift_sim"
                 result8 = gabor_sift_sim(path1, path2)
                 list8 = [string8, result8]
                 listaResultados.append(list8)
     #flag psnr activado
-            if (flags[9] == 1):
+    if (flags[9] == 1):
                 string9 = "psnr"
                 result9 = psnr(path1, path2)
                 list9 = [string9, result9]
                 listaResultados.append(list9)
     #flag lsh activado
-            if (flags[10] == 1):
+    if (flags[10] == 1):
                 string10 = "lsh"
                 result10 = lsh(path1, path2)
                 list10 = [string10, result10]
                 listaResultados.append(list10)
     #flag histograma color activado
-            if (flags[11] == 1):
+    if (flags[11] == 1):
                 string11 = "histogramaColor"
                 result11 = histogramaColor(path1, path2)
                 list11 = [string11, result11]

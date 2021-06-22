@@ -1,0 +1,10 @@
+Posible plagio detectado entre la imagen directorios/Trabajo1/IMAGEN1_cambioColorCanalAzul.jpg del directorio Trabajo1 y la imagen directorios/Trabajo2/IMAGEN1_original.jpg del directorio Trabajo2
+Posible plagio detectado entre la imagen directorios/Trabajo1/IMAGEN4_cambioTono.jpg del directorio Trabajo1 y la imagen directorios/Trabajo2/IMAGEN4_original.jpg del directorio Trabajo2
+Posible plagio detectado entre la imagen directorios/Trabajo1/IMAGEN3_cambioBrillo.jpg del directorio Trabajo1 y la imagen directorios/Trabajo2/IMAGEN1_original.jpg del directorio Trabajo2
+Posible plagio detectado entre la imagen directorios/Trabajo1/IMAGEN3_cambioBrillo.jpg del directorio Trabajo1 y la imagen directorios/Trabajo3/IMAGEN2_original.jpg del directorio Trabajo3
+Posible plagio detectado entre la imagen directorios/Trabajo1/IMAGEN3_cambioBrillo.jpg del directorio Trabajo1 y la imagen directorios/Trabajo3/IMAGEN3_rotada.jpg del directorio Trabajo3
+Posible plagio detectado entre la imagen directorios/Trabajo2/IMAGEN4_original.jpg del directorio Trabajo2 y la imagen directorios/Trabajo1/IMAGEN4_cambioTono.jpg del directorio Trabajo1
+Posible plagio detectado entre la imagen directorios/Trabajo2/IMAGEN1_original.jpg del directorio Trabajo2 y la imagen directorios/Trabajo1/IMAGEN1_cambioColorCanalAzul.jpg del directorio Trabajo1
+Posible plagio detectado entre la imagen directorios/Trabajo2/IMAGEN2_recortadaMArco.JPG del directorio Trabajo2 y la imagen directorios/Trabajo3/IMAGEN2_original.jpg del directorio Trabajo3
+Posible plagio detectado entre la imagen directorios/Trabajo3/IMAGEN2_original.jpg del directorio Trabajo3 y la imagen directorios/Trabajo2/IMAGEN2_recortadaMArco.JPG del directorio Trabajo2
+Posible plagio detectado entre la imagen directorios/Trabajo3/IMAGEN3_rotada.jpg del directorio Trabajo3 y la imagen directorios/Trabajo1/IMAGEN3_cambioBrillo.jpg del directorio Trabajo1
