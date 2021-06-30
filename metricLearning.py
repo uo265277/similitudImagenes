@@ -58,7 +58,7 @@ import os
 import random
 import numpy as np
 #Leer todas las imágenes de un directorio
-carpeta="/home/claudia/PycharmProjects/similitudImagenes/datasetMetricLearning/X"
+carpeta="directorios/TODOS_TRABAJOS"
 
 # grab the image paths and randomly shuffle them
 print("[INFO] Cargando imagenes...")
@@ -174,6 +174,7 @@ x_train=[]
 index_train=random.sample(range(len(imagenes)*nVariaciones),int(len(imagenes)*nVariaciones*0.8))
 #contador para saber en donde va cada ejemplo test o train
 k=0
+porcentajeMinimoCrop=0.7
 #cada imagen original define su clase, recorro en paralelo
 #la lista de nombres y un rango de modo que la primera imagen es la clase 0, la segunda l la 1, etc
 for nombre,clase in zip(imagenes.keys(),range(len(imagenes))):
@@ -538,7 +539,7 @@ print("Embeddings orig ok?",compruebaEmbeddings(embeddingsOriginales))
 #leer las imágenes de otro directorio/documento, calcular la representación, calcular la diferencia
 #con la representación de cada uno de los originales
 
-carpeta='/home/claudia/PycharmProjects/similitudImagenes/datasetMetricLearning/X'
+carpeta='/home/claudia/PycharmProjects/similitudImagenes/directorios/TRABAJO_A'
 
 # grab the image paths and randomly shuffle them
 print("[INFO] Cargando imagenes...")
@@ -580,7 +581,7 @@ for imagen in diccionarioEmbeddingsOriginales.keys():
 
 
 
-carpeta='/home/claudia/PycharmProjects/similitudImagenes/datasetMetricLearning/Y2'
+carpeta='/home/claudia/PycharmProjects/similitudImagenes/directorios/TRABAJO_A'
 
 # grab the image paths and randomly shuffle them
 print("[INFO] Cargando imagenes...")
@@ -627,7 +628,7 @@ for imagen in diccionarioEmbeddingsOriginales.keys():
 #mirar si las detecta entre otras no plagiadas.
 
 
-carpeta='/home/claudia/PycharmProjects/similitudImagenes/datasetMetricLearning/Z'
+carpeta='/home/claudia/PycharmProjects/similitudImagenes/directorios/TRABAJO_A'
 
 # grab the image paths and randomly shuffle them
 print("[INFO] Cargando imagenes...")
@@ -663,7 +664,7 @@ for imagen in diccionarioEmbeddingsOriginales.keys():
 
 
 
-carpeta='/home/claudia/PycharmProjects/similitudImagenes/datasetMetricLearning/Y2'
+carpeta='/home/claudia/PycharmProjects/similitudImagenes/directorios/TRABAJO_A'
 
 # grab the image paths and randomly shuffle them
 print("[INFO] Cargando imagenes...")

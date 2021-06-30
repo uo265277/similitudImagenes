@@ -174,7 +174,7 @@ def mse(img_path, img_path2):
     err /= float(imageA.shape[0] * imageA.shape[1])
     # return the MSE, the lower the error, the more "similar"
     # the two images are
-    return err/10000
+    return err/100000
 
 
 
@@ -223,7 +223,7 @@ def psnr(img_path, img_path2):
         return 0
     max_pixel = 255.0
     psnr = 20 * math.log10(max_pixel / math.sqrt(mse))
-    return psnr/255
+    return 1-(psnr/255)
 
 
 

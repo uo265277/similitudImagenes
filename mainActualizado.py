@@ -4,7 +4,6 @@ from calculoRangos import calcularRangos, rangosPrefijados, rangosImagenesIndivi
 from diccionarioGlobal import calculaDiccionario
 from normalizacionComparadores import obtieneMaxComparadores, sacarLista, aplicaNormalizacion
 
-
 #1.Se obtienen los subdirectorios de el Directorio general "directorios"
 directorios = ayudaDirectorios.obtenerDirectorios()
 
@@ -45,13 +44,12 @@ if (len(flags) !=12):
 
 #****************************************ELEGIR OPCIÓN RANGOS***********************************************************
 # Elegir opcion
-opcion="b"
+opcion="c"
 #***********************************************************************************************************************
 maximos=[]
 if(opcion=="a"): maximos=rangosPrefijados(flags)
 elif(opcion=="c"):
-    muestras=3
-    maximos=rangosImagenesAleatorias(flags, muestras, directorios)
+    maximos=rangosImagenesAleatorias(flags, directorios)
 if(opcion!="b" and opcion!="a" and opcion!="c"):
     raise AssertionError()
 

@@ -9,6 +9,7 @@ def calculaDiccionario(imagenes, flags, maximos, opcion):
     # CREO EL DICCIONARIO GLOBAL
     diccionarioGlobal: dict = {}
     cont =0
+    plagios=0
     dirAux =""
     with open("resultados.txt","w") as f:
         for k in imagenes:
@@ -36,9 +37,11 @@ def calculaDiccionario(imagenes, flags, maximos, opcion):
             print()
             print("*************DICCIONARIO DE DIRECTORIO  " +dirK +" ******************")
             # print("Se procede a calcular las distancias de las demás imagenes con la imagen: ",k)
-
+            maximos = rangosImagenesIndividuales(flags, k)
             # si el contador es 0 quiere decir que he cambiado de directorio
             if (dirAux!=dirK):
+                f.write("************************SE HA CONTABILIZADO UN TOTAL DE " + str(plagios) + " POSIBLES PLAGIOS EN EL TRABAJO " + str( dirAux)+ "***************************"+'\n')
+                plagios=0
                 print("traza if (dirAux!=dirK): ")
                 diccionarioDirectorios ="DiccionarioDelDirectorio " +dirK
                 print(diccionarioDirectorios)
@@ -47,6 +50,7 @@ def calculaDiccionario(imagenes, flags, maximos, opcion):
 
                 # ASIGNO A LA CLAVE DIR* EL DICCIONARIO DE DIR*
                 diccionarioGlobal[dirK ]= diccionarioDirectorios
+
 
             # CREO EL SUBDICCIONARIO DE LA IMAGEN
             nomK = ayudaDirectorios.nombreImagen(k)
@@ -60,10 +64,8 @@ def calculaDiccionario(imagenes, flags, maximos, opcion):
             # print("Estado del diccionadio de pruebas_directorio "+ dirK+" : ")
             # print(diccionarioDirectorios)
             # print("fin")
-            cambio=False
-            plagios=0
-            directorioCambiado=True
-            anteriorDirectorio=""
+
+
             for k2 in imagenes:
 
                 #si el anterior directorio no es como dirK2 saco los resultados de anteriordirectorio y plagios y pongo
@@ -71,11 +73,7 @@ def calculaDiccionario(imagenes, flags, maximos, opcion):
 
                 dirK2 = ayudaDirectorios.directorioImagen(k2)
                 nomK2 = ayudaDirectorios.nombreImagen(k2)
-                if(anteriorDirectorio!=dirK2 and anteriorDirectorio!=""):
 
-                    f.write("Se ha contabilizado un total de "+str(plagios)+" posibles plagios entre el trabajo"+str(dirK)+" y el trabajo "+str(anteriorDirectorio)+'\n')
-                    plagios=0
-                    anteriorDirectorio=dirK2
 
 
                 if(dirK !=dirK2):
@@ -93,7 +91,6 @@ def calculaDiccionario(imagenes, flags, maximos, opcion):
 
                    else:
                        #en caso de estar en la opcion b, se individualiza los maximos por imagen
-                       maximos = rangosImagenesIndividuales(flags, k)
                        pertenece = estaEnRango(listaResultados, maximos)
                        # si pertenece lo añado a resultados
                        if (pertenece):
@@ -106,6 +103,9 @@ def calculaDiccionario(imagenes, flags, maximos, opcion):
             #  print("diff es")
             #  print(diff)
             #  distancias[k]=diff
+    f=open("resultados.txt","a")
+    f.write("************************SE HA CONTABILIZADO UN TOTAL DE " + str(plagios) + " POSIBLES PLAGIOS EN EL TRABAJO " + str(dirK) + "***************************"+'\n')
+    f.close()
     return diccionarioGlobal
 
 

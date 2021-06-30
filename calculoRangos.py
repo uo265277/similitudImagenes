@@ -11,8 +11,7 @@
 #9 psnr
 #10 lsh
 #11 histograma color
-from random import random
-
+import random
 import cv2
 
 import ayudaDirectorios
@@ -174,18 +173,37 @@ def obtieneMax(resultados,flags):
                 rangosMax.append(resultados[1][i])
             i=i+1
     return rangosMax
-def rangosImagenesAleatorias(flags, muestras, directorios):
-    dirAleatorio = random.choices(directorios)
-    dirAleatorio = dirAleatorio.pop()
-    pathAleatorio = random.choices(ayudaDirectorios.getAllFilesInDirectory("directorios/" + dirAleatorio))
-    pathAleatorio = pathAleatorio.pop()
-    print(pathAleatorio)
-    print("traza")
-    # siendo rangos una lista con los maximos de cada comparador
-    rangos = calcularRangos(pathAleatorio, flags, 0.05)
+def rangosImagenesAleatorias(flags,directorios):
+    muestras=3
+    resultados=[]
+    x=0
+    while(x<muestras):
 
-    print("los rangos elegidos son:")
-    print(rangos)
+        dirAleatorio = random.choices(directorios)
+        dirAleatorio = dirAleatorio.pop()
+        pathAleatorio = random.choices(ayudaDirectorios.getAllFilesInDirectory("directorios/" + dirAleatorio))
+        pathAleatorio = pathAleatorio.pop()
+        resultado=rangosImagenesIndividuales(flags,pathAleatorio)
+        resultados.append(resultado)
+        x=x+1
+    #resultados = [  [[metodo,valor],[metodo,valor]...]...]
+    longListaMax = flags.count(1)
+    rangosMax = []
+    i = 0
+    while (i < longListaMax):
+        #tomando 3 muestras, esto se puede optimizar
+        media=resultados[0][i][1] + resultados[1][i][1] + resultados[2][i][1]
+        media=media/3
+        resultado=[resultados[0][i][0],media]
+        rangosMax.append(resultado)
+        i = i + 1
+    return rangosMax
+
+
+
+
+
+
 
 
 def estaEnRango(resultados, maximos):
@@ -202,7 +220,7 @@ def estaEnRango(resultados, maximos):
     i=0
     pertenece=False
     while(i<len(lista2)):
-        if (lista1[i]<lista2[i]):
+        if (lista1[i]<lista2[i] or lista1[i]==lista2[i]):
             pertenece=True
         i=i+1
     return pertenece
