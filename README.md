@@ -71,11 +71,30 @@ wrapt 1.12.1
 
 ```
 ## Uso
-En mainActualizado.py elegir las sigu
 ```python
-import foobar
+1er PASO:
+Colocar todos los trabajos en la carpeta "pdf"
 
-foobar.pluralize('word') # returns 'words'
-foobar.pluralize('goose') # returns 'geese'
-foobar.singularize('phenomena') # returns 'phenomenon'
+2o PASO: 
+En mainActualizado.py elegir los métodos para realizar la comparativa mediante la estructura flags
+#flags
+# 0 escalagrises
+# 1 normalizado
+# 2 clahe
+# 3 hog
+# 4 gabor
+# 5 sift_sim
+# 6 ssim
+# 7 mse
+# 8 gabor + sift sim
+# 9 psnr
+# 10 lsh
+# 11 histograma color
+
+3er PASO: 
+#4. Se elige la forma de obtener los rangos:
+# a)- Rangos prefijados
+# b)- Rangos obtenidos para cada imagen mediante su comparativa con modificaciones automáticas para esa imagen
+# c)- Rangos obtenidos para un número prefijado de imágenes del dataset  mediante su comparativa con modificaciones
+#       automáticas para esas imágenes
 ```
