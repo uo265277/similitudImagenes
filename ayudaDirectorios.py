@@ -55,7 +55,9 @@ def obtenerDirectorios():
     contenido = os.listdir('directorios')
     return contenido
 
-
+def obtenerTrabajos():
+    contenido = os.listdir('pdf')
+    return contenido
 # *******************************************************************************
 # imprime un diccionari de una forma más visual
 def pretty(d, indent=0):

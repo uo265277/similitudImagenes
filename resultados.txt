@@ -1,11 +1,1 @@
 Posible plagio detectado entre la imagen directorios/TRABAJO_C/img1.jpeg del directorio TRABAJO_C y la imagen directorios/TRABAJO_A/img1.jpeg del directorio TRABAJO_A
-Posible plagio detectado entre la imagen directorios/TRABAJO_C/img5.jpg del directorio TRABAJO_C y la imagen directorios/TRABAJO_A/img5.jpg del directorio TRABAJO_A
-Posible plagio detectado entre la imagen directorios/TRABAJO_C/img4.jpg del directorio TRABAJO_C y la imagen directorios/TRABAJO_B/img4.jpg del directorio TRABAJO_B
-************************SE HA CONTABILIZADO UN TOTAL DE 3 POSIBLES PLAGIOS EN EL TRABAJO TRABAJO_C***************************
-Posible plagio detectado entre la imagen directorios/TRABAJO_B/img2.jpg del directorio TRABAJO_B y la imagen directorios/TRABAJO_A/img2.jpeg del directorio TRABAJO_A
-Posible plagio detectado entre la imagen directorios/TRABAJO_B/img4.jpg del directorio TRABAJO_B y la imagen directorios/TRABAJO_C/img4.jpg del directorio TRABAJO_C
-************************SE HA CONTABILIZADO UN TOTAL DE 2 POSIBLES PLAGIOS EN EL TRABAJO TRABAJO_B***************************
-Posible plagio detectado entre la imagen directorios/TRABAJO_A/img1.jpeg del directorio TRABAJO_A y la imagen directorios/TRABAJO_C/img1.jpeg del directorio TRABAJO_C
-Posible plagio detectado entre la imagen directorios/TRABAJO_A/img2.jpeg del directorio TRABAJO_A y la imagen directorios/TRABAJO_B/img2.jpg del directorio TRABAJO_B
-Posible plagio detectado entre la imagen directorios/TRABAJO_A/img5.jpg del directorio TRABAJO_A y la imagen directorios/TRABAJO_C/img5.jpg del directorio TRABAJO_C
-************************SE HA CONTABILIZADO UN TOTAL DE 3 POSIBLES PLAGIOS EN EL TRABAJO TRABAJO_A***************************

@@ -1,8 +1,27 @@
+import os
 import random
 import ayudaDirectorios
 from calculoRangos import calcularRangos, rangosPrefijados, rangosImagenesIndividuales, rangosImagenesAleatorias
 from diccionarioGlobal import calculaDiccionario
 from normalizacionComparadores import obtieneMaxComparadores, sacarLista, aplicaNormalizacion
+from subprocess import call
+from pasaraJPG import pasarAJPG
+
+#0. Se extraen las imágenes de los PDF del directorio pdf
+#en caso de dar errores de permiso -> chmod 755 ejecutable
+trabajos = ayudaDirectorios.obtenerTrabajos()
+for pdf in trabajos:
+    nombreDir="directorios/"+pdf+"/"
+    nombretrabajo="pdf/"+pdf
+    os.mkdir(nombreDir)
+    call(["/home/claudia/PycharmProjects/similitudImagenes/pdfimages", "-j",nombretrabajo, nombreDir])
+    #se eliminan posibles archivos que no son imagenes
+    for img_path in ayudaDirectorios.getAllFilesInDirectory(nombreDir):
+        print(img_path)
+        if ".ppm" in img_path or ".pgm" in img_path:
+            print("entro con la imagen " + img_path)
+            os.remove(img_path)
+
 
 #1.Se obtienen los subdirectorios de el Directorio general "directorios"
 directorios = ayudaDirectorios.obtenerDirectorios()

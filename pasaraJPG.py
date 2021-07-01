@@ -14,7 +14,5 @@ def pasarAJPG(path):
     return nombreFinal
 
 
-for img_path in getAllFilesInDirectory(r"C:\Users\claud\Desktop\CUARTO_ING_INF\TFG\similitudImagenes\datasetModificado\FRANK"):
-  pasarAJPG(img_path)
 
 

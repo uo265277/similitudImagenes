@@ -33,6 +33,7 @@ def findDifference(f1, f2):
 
 model = ResNet50(weights='imagenet')
 
+#FUNCION QUE PREPROCESA CON ESCALA DE GRISES PARA DESPUES CALCULAR SIMILITUD COMPARANDO AMBOS VECTORES DE CARACTERÍSTICAS
 def escalaGrises(img_path, img_path2):
     print("estoy en escala grises")
     global  model
@@ -40,11 +41,9 @@ def escalaGrises(img_path, img_path2):
     image = cv2.imread(img_path)
     # Resizing the image for compatibility
     image = cv2.resize(image, (224, 224))
-
     image2 = cv2.imread(img_path2)
     # Resizing the image for compatibility
     image2 = cv2.resize(image2, (224, 224))
-
     # The initial processing of the image
     # image = cv2.medianBlur(image, 3)
     image_bw = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -54,20 +53,17 @@ def escalaGrises(img_path, img_path2):
     #print( diff)
     return diff
 
+#FUNCION QUE PREPROCESA CON NORMALIZADO PARA DESPUES CALCULAR SIMILITUD COMPARANDO AMBOS VECTORES DE CARACTERÍSTICAS
 def normalizado(img_path, img_path2):
     print("estoy en normalizado")
-
-
     global model
     # Reading the image from the present directory
     image = cv2.imread(img_path)
     # Resizing the image for compatibility
     image = cv2.resize(image, (224, 224))
-
     image2 = cv2.imread(img_path2)
     # Resizing the image for compatibility
     image2 = cv2.resize(image2, (224, 224))
-
     # The initial processing of the image
     # image = cv2.medianBlur(image, 3)
     image_bw = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -77,10 +73,9 @@ def normalizado(img_path, img_path2):
     diff = findDifference(predice(image_bw, model), predice(image2_bw, model))
     return diff
 
-
+#FUNCION QUE PREPROCESA CON CLAHE PARA DESPUES CALCULAR SIMILITUD COMPARANDO AMBOS VECTORES DE CARACTERÍSTICAS
 def clahe(img_path, img_path2):
     print("estoy en clahe")
-
     global model
     image = cv2.imread(img_path)
     image2 = cv2.imread(img_path2)
@@ -94,9 +89,9 @@ def clahe(img_path, img_path2):
     diff = findDifference(predice(image_bw, model), predice(image2_bw, model))
     return diff
 
+#FUNCION QUE PREPROCESA CON HOG PARA DESPUES CALCULAR SIMILITUD COMPARANDO AMBOS VECTORES DE CARACTERÍSTICAS
 def hog(img_path, img_path2):
     print("estoy en hog")
-
     global model
     img = cv2.imread(img_path)
     img2 = cv2.imread(img_path2)
@@ -111,9 +106,9 @@ def hog(img_path, img_path2):
     diff = findDifference(predice(hog_image, model), predice(hog_image2, model))
     return diff
 
+#FUNCION QUE PREPROCESA CON GABOR PARA DESPUES CALCULAR SIMILITUD COMPARANDO AMBOS VECTORES DE CARACTERÍSTICAS
 def gabor(img_path, img_path2):
     print("estoy en gabor")
-
     global model
     g_kernel = cv2.getGaborKernel((21, 21), 8.0, 4 * np.pi / 4, 10.0, 0.5, 0, ktype=cv2.CV_32F)
     img = cv2.imread(img_path)
@@ -127,6 +122,7 @@ def gabor(img_path, img_path2):
     diff = findDifference(predice(filtered_img, model), predice(filtered_img2, model))
     return diff
 
+#FUNCION QUE APLICA SIFT PARA DETERMINAR LA SIMILITUD ENTRE DOS IMAGENES
 def sift_sim(path_a, path_b):
   print("path dentro pruebasSiftSim: "+ path_a +" " + path_b)
   orb = cv2.ORB_create()
@@ -152,7 +148,7 @@ def sift_sim(path_a, path_b):
     return 1
   return 1-resultado
 
-
+#FUNCION QUE APLICA SSIM PARA DETERMINAR LA SIMILITUD ENTRE DOS IMAGENES
 def ssim(img_path, img_path2):
     img = cv2.imread(img_path)
     img2 = cv2.imread(img_path2)
@@ -162,6 +158,8 @@ def ssim(img_path, img_path2):
     s = measure.compare_ssim(image, image2, multichannel=True)
     return 1-s
 
+
+#FUNCION QUE APLICA MSE PARA DETERMINAR LA SIMILITUD ENTRE DOS IMAGENES
 def mse(img_path, img_path2):
     # the 'Mean Squared Error' between the two images is the
     # sum of the squared difference between the two images;
@@ -178,12 +176,11 @@ def mse(img_path, img_path2):
 
 
 
-
+#FUNCION QUE APLICA GABOR+SIFT PARA DETERMINAR LA SIMILITUD ENTRE DOS IMAGENES
 def gabor_sift_sim(img_path, img_path2):
     print("estoy en gabor + sift sim")
     orb = cv2.ORB_create()
     model = ResNet50(weights='imagenet')
-
     g_kernel = cv2.getGaborKernel((21, 21), 8.0, 4 * np.pi / 4, 10.0, 0.5, 0, ktype=cv2.CV_32F)
     img = cv2.imread(img_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -212,6 +209,7 @@ def gabor_sift_sim(img_path, img_path2):
         return 1
     return 1-resultado
 
+#FUNCION QUE APLICA PSNR PARA DETERMINAR LA SIMILITUD ENTRE DOS IMAGENES
 def psnr(img_path, img_path2):
     original = cv2.imread(img_path)
     compressed = cv2.imread(img_path2)
@@ -227,7 +225,7 @@ def psnr(img_path, img_path2):
 
 
 
-
+#FUNCION QUE CALCULA LA FIRMA DE UNA IMAGEN
 def calculate_signature(image_file: str, hash_size: int) -> np.ndarray:
     """
     Calculate the dhash signature of a given file
@@ -253,8 +251,7 @@ def calculate_signature(image_file: str, hash_size: int) -> np.ndarray:
 
 
 
-
-#lsh (path1, path2, threshold, hash_size, bands
+#FUNCION QUE APLICA LSH PARA DETERMINAR LA SIMILITUD ENTRE DOS IMAGENES
 def lsh(img_path1,img_path2):
     threshold = 0.0
     hash_size = 8
@@ -304,7 +301,6 @@ def lsh(img_path1,img_path2):
                         candidate_pairs.add(
                             tuple([hash_bucket[i], hash_bucket[j]])
                         )
-
     # Check candidate pairs for similarity
     near_duplicates = list()
     for cpa, cpb in candidate_pairs:
@@ -316,7 +312,6 @@ def lsh(img_path1,img_path2):
         if similarity > threshold:
             near_duplicates.append((cpa, cpb, 1-similarity))
     near_duplicates.sort(key=lambda x: x[2], reverse=True)
-
     if (len(near_duplicates) != 0):
        return near_duplicates[0][2]
     else:
@@ -324,23 +319,17 @@ def lsh(img_path1,img_path2):
 
 
 
-
+#FUNCION QUE APLICA HISTOGRAMA DE COLOR PARA DETERMINAR LA SIMILITUD ENTRE DOS IMAGENES
 def histogramaColor(img_path, img_path2):
-
     original = img_path
     comparada = img_path2
-
     image1 = cv2.imread(comparada)
     image1 = cv2.cvtColor(image1, cv2.COLOR_BGR2RGB)
     image2 = cv2.imread(original)
     image2 = cv2.cvtColor(image2, cv2.COLOR_BGR2RGB)
-
     image_list = [image1, image2]
     histograms = [cv2.calcHist([img], [0], None, [256], [0, 256]) for img in image_list]
     histn = [cv2.normalize(hist, hist).flatten() for hist in histograms]
-
     result = cv2.compareHist(histn[0], histn[1], cv2.HISTCMP_CORREL)
-
     result = 1 - result
-
     return result
