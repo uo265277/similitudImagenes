@@ -1,5 +1,5 @@
 # Prototipo para detectar similitud entre imágenes
-Herramuienta que permite a partir de diferentes métodos detectar plagios en trabajos académicos
+Herramienta que permite a partir de diferentes métodos detectar plagios en trabajos académicos
 
 ## Instalación
 
